@@ -7,11 +7,11 @@ default: &default
 
 development:
   <<: *default
-  database: flaredown_development
+  database: caredown_development
 
 test:
   <<: *default
-  database: flaredown_test
+  database: caredown_test
 
 production:
   <<: *default
