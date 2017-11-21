@@ -1,9 +1,16 @@
 import Ember from 'ember';
+import config from 'flaredown/config/environment';
 
-export default Ember.Component.extend({
+const {
+  computed: { alias },
+  Component
+} = Ember;
 
-  model: Ember.computed.alias('parentView.model'),
-  checkin: Ember.computed.alias('model.checkin'),
+export default Component.extend({
+
+  model: alias('parentView.model'),
+  checkin: alias('model.checkin'),
+  showForCaredown: config.showForCaredown,
 
   actions: {
     completeStep() {

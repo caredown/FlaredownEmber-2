@@ -33,4 +33,13 @@
       }
     }
   }
+
+  .hiddenBlock {
+    display: none;
+  }
+}
+
+.flexCenteredContainer {
+  display: flex;
+  justify-content: center;
 }

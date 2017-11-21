@@ -16,6 +16,8 @@ module.exports = function(environment) {
       }
     },
 
+    showForCaredown: true,
+
     fastboot: {
       hostWhitelist: ['flaredown-webapp.herokuapp.com', 'staging.flaredown.com', 'app.flaredown.com', 'flaredown-staging-webapp.herokuapp.com', /^localhost:\d+$/]
     },
