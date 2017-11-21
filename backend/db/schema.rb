@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822122800) do
+ActiveRecord::Schema.define(version: 20171121102731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
   enable_extension "hstore"
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name",            null: false
+    t.string "app_name",        null: false
+    t.string "theme_color"
+    t.text   "term_of_service"
+    t.text   "privacy_policy"
+  end
 
   create_table "condition_translations", force: :cascade do |t|
     t.integer  "condition_id", null: false

@@ -58,6 +58,39 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: clients; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE clients (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    app_name character varying NOT NULL,
+    theme_color character varying,
+    term_of_service text,
+    privacy_policy text
+);
+
+
+--
+-- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE clients_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE clients_id_seq OWNED BY clients.id;
+
+
+--
 -- Name: condition_translations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -838,6 +871,13 @@ ALTER SEQUENCE weathers_id_seq OWNED BY weathers.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY clients ALTER COLUMN id SET DEFAULT nextval('clients_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY condition_translations ALTER COLUMN id SET DEFAULT nextval('condition_translations_id_seq'::regclass);
 
 
@@ -986,6 +1026,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 ALTER TABLE ONLY weathers ALTER COLUMN id SET DEFAULT nextval('weathers_id_seq'::regclass);
+
+
+--
+-- Name: clients_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY clients
+    ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
 
 
 --
@@ -1624,4 +1672,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170817154145');
 INSERT INTO schema_migrations (version) VALUES ('20170818085110');
 
 INSERT INTO schema_migrations (version) VALUES ('20170822122800');
+
+INSERT INTO schema_migrations (version) VALUES ('20171121102731');
 
