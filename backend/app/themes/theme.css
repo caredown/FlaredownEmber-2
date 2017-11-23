@@ -1,0 +1,77 @@
+/* pace-theme-minimal */
+.pace .pace-progress {
+  background: <%= @theme_color %>;
+}
+
+/* layout */
+a {
+  color: <%= @theme_color %>;
+  &:hover {
+    color: darken(<%= @theme_color %>, 30%)
+  }
+}
+
+.nav.unauthenticatedNav {
+  background: lighten(<%= @theme_color %>, 40%);
+}
+
+.nav.unauthenticatedNav h5 {
+  color: <%= @theme_color %>;
+}
+
+@media screen and (max-width: $medium-screen) {
+.nav.unauthenticatedNav {
+    border-bottom: 1px solid <%= @theme_color %>;
+  }
+}
+
+@media screen and (min-width: $medium-screen) {
+  .nav.unauthenticatedNav {
+    border: 1px solid <%= @theme_color %>;
+  }
+}
+
+.search-resource {
+  span { color: <%= @theme_color %> }
+}
+.typeTopickable { color: $grey }
+
+.join-footer { background: <%= @theme_color %> }
+
+
+/* _btn-group */
+.btn-group {
+  button {
+    background-color: <%= @theme_color %>;
+    &.active {
+      background-color: darken(<%= @theme_color %>, 15%);
+    }
+  }
+}
+
+/* _bottom_nav */
+.bottom-nav .bottom-link.active label {
+  color: <%= @theme_color %>;
+}
+
+.bottom-nav .bottom-link.active .icon * {
+  fill: <%= @theme_color %>;
+}
+
+
+/* global */
+.tip {
+  background: #ECF7F6;
+  color: <%= @theme_color %>;
+  border: 1px solid <%= @theme_color %>;
+}
+
+.primary-btn { background-color: <%= @theme_color %> }
+.primary-btn:hover { background-color: rgba(0, 0, 0, 0.5) }
+.primary-btn:focus { background-color: rgba(0, 0, 0, 0.5) }
+
+.unreadNotification { background: lighten(<%= @theme_color %>, 40%) }
+
+input[type="submit"] { background-color: <%= @theme_color %> }
+input[type="submit"]:hover { background-color: rgba(0, 0, 0, 0.5) }
+

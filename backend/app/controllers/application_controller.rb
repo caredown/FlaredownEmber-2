@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   before_action :authenticate_user_from_token!, if: :presence_of_authentication_token?
   before_action :authenticate_user!, except: [:root]
-  before_action :set_locale
+  before_action :set_locale, :set_client
 
   def root
     render json: {
@@ -16,6 +16,11 @@ class ApplicationController < ActionController::API
         minor: 0
       }
     }
+  end
+
+  def set_client
+    subdomain = request.host.split('.')[0]
+    @subdomain ||= request.subdomain
   end
 
   protected

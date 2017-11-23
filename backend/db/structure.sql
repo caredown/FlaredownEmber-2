@@ -66,8 +66,10 @@ CREATE TABLE clients (
     name character varying NOT NULL,
     app_name character varying NOT NULL,
     theme_color character varying,
+    background_color character varying,
     term_of_service text,
-    privacy_policy text
+    privacy_policy text,
+    logo character varying
 );
 
 

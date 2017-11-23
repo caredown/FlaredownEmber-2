@@ -19,11 +19,13 @@ ActiveRecord::Schema.define(version: 20171121102731) do
   enable_extension "hstore"
 
   create_table "clients", force: :cascade do |t|
-    t.string "name",            null: false
-    t.string "app_name",        null: false
+    t.string "name",             null: false
+    t.string "app_name",         null: false
     t.string "theme_color"
+    t.string "background_color"
     t.text   "term_of_service"
     t.text   "privacy_policy"
+    t.string "logo"
   end
 
   create_table "condition_translations", force: :cascade do |t|

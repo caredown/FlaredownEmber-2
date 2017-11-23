@@ -201,6 +201,9 @@ Rails.application.routes.draw do
 
       resources :patterns
       resources :charts_pattern, only: [:index]
+
+      get '/clients', to: 'clients#show'
+      get '/clients/theme', to: 'clients#theme'
     end
   end
 end
