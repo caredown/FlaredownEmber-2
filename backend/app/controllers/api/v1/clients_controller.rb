@@ -11,7 +11,7 @@ class Api::V1::ClientsController < ApplicationController
     return unless @client
 
     @theme_color = @client.theme_color
-    # @theme_color_rgba = @theme_color.scan(/../).map {|color| color.to_i(16)} << 0.6
+    @theme_color_rgba = @theme_color.gsub('#', '').scan(/../).map {|color| color.to_i(16)}
 
     render file: Rails.root.join('app/themes/', 'theme.css'), content_type: 'text/css'
   end

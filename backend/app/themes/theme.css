@@ -4,12 +4,8 @@
 }
 
 /* layout */
-a {
-  color: <%= @theme_color %>;
-  &:hover {
-    color: darken(<%= @theme_color %>, 30%)
-  }
-}
+a { color: <%= @theme_color %> }
+a:hover { color: rgba(0, 0, 0, 0.6) }
 
 .nav.unauthenticatedNav {
   background: lighten(<%= @theme_color %>, 40%);
@@ -67,11 +63,35 @@ a {
 }
 
 .primary-btn { background-color: <%= @theme_color %> }
-.primary-btn:hover { background-color: rgba(0, 0, 0, 0.5) }
+.primary-btn:hover /*{ background-color: rgba(0, 0, 0, 0.5) }*/
 .primary-btn:focus { background-color: rgba(0, 0, 0, 0.5) }
 
 .unreadNotification { background: lighten(<%= @theme_color %>, 40%) }
 
 input[type="submit"] { background-color: <%= @theme_color %> }
-input[type="submit"]:hover { background-color: rgba(0, 0, 0, 0.5) }
+input[type="submit"]:hover { background-color: rgba(<%= (@theme_color_rgba << 0.6).join(', ') %>) }
 
+
+/* settings page */
+.ember-power-select-option[aria-current="true"] { background-color: <%= @theme_color %> }
+
+input.ember-power-select-search-input:focus {
+  border-color: <%= @theme_color %>;
+  box-shadow: 0 0 5px <%= @theme_color %>;
+}
+
+.colorable-bg-35 { background-color: <%= @theme_color %> !important }
+
+.picker__list-item--selected,
+.picker--focused .picker__list-item--selected {
+  background: #dddddd;
+  border: none;
+}
+.picker__list-item:hover {
+  background: <%= @theme_color %>;
+  border: none;
+}
+
+/* Search navigation bar */
+.search-resource span { color: <%= @theme_color %> }
+.search-resource > a > svg > path { fill: <%= @theme_color %> }
