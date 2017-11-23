@@ -5,7 +5,6 @@ import config from 'flaredown/config/environment';
 const {
   get,
   computed,
-  computed: { alias },
   Component,
   inject: {
     service,

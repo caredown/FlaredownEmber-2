@@ -1,11 +1,13 @@
-{{partial "application/header"}}
+{{#application-wrapper}}
+  {{partial "application/header"}}
 
-{{outlet}}
+  {{outlet}}
 
-{{partial "application/footer"}}
+  {{partial "application/footer"}}
 
-{{#if session.isAuthenticated}}
-  {{bottom-nav}}
-{{/if}}
+  {{#if session.isAuthenticated}}
+    {{bottom-nav}}
+  {{/if}}
 
-{{outlet "modal"}}
+  {{outlet "modal"}}
+{{/application-wrapper}}
