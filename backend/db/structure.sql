@@ -65,6 +65,7 @@ CREATE TABLE clients (
     id integer NOT NULL,
     name character varying NOT NULL,
     app_name character varying NOT NULL,
+    slug_name character varying NOT NULL,
     theme_color character varying,
     background_color character varying,
     term_of_service text,

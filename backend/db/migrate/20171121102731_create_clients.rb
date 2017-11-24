@@ -3,6 +3,7 @@ class CreateClients < ActiveRecord::Migration
     create_table :clients do |t|
       t.string :name, null: false
       t.string :app_name, null: false
+      t.string :slug_name, null: false
       t.string :theme_color
       t.string :background_color
       t.text   :term_of_service, limit: 1073741823

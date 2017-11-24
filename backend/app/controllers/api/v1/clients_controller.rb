@@ -18,6 +18,6 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def find_client
-    @client ||= Client.find_by(app_name: params[:subdomain])
+    @client ||= Client.find_by(slug_name: params[:subdomain])
   end
 end
