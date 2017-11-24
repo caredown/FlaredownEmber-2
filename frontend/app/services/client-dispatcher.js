@@ -6,18 +6,15 @@ const {
   computed,
   inject: { service },
   Service,
+  RSVP: { resolve }
 } = Ember;
 
 export default Service.extend({
-  store: service(),
+  store: service('store'),
 
   showForCaredown: config.showForCaredown,
   DOMAINS: config.DOMAINS,
-  caredownHostArray: typeof location !== 'undefined' && location.host.split('.'),
-
-  caredownSubdomain: computed('caredownHostArray', function() {
-    return get(this, 'caredownHostArray.firstObject');
-  }),
+  caredownSubdomain: typeof location !== 'undefined' && location.host.split('.')[0],
 
   logoPath: computed('caredownSubdomain', function() {
     const caredownSubdomain = get(this, 'caredownSubdomain');
@@ -27,9 +24,14 @@ export default Service.extend({
   }),
 
   fetchData() {
-    console.log('Fetch client Data!');
-    const clientName = get(this, 'caredownSubdomain');
+    const store = get(this, 'store');
+    const subdomain = get(this, 'caredownSubdomain');
+    const storedClient = get(store.peekAll('client').filterBy('appName', subdomain), 'firstObject');
 
-    get(this, 'store').queryRecord('client', { subdomain: clientName });
+    if(storedClient) {
+      return resolve(storedClient);
+    } else {
+      return store.queryRecord('client', { subdomain });
+    }
   }
 });
