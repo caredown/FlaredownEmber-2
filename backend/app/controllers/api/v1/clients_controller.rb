@@ -10,8 +10,9 @@ class Api::V1::ClientsController < ApplicationController
     @client ||= Client.last
     return unless @client
 
+    @background_color = @client.background_color
     @theme_color = @client.theme_color
-    @theme_color_rgba = @theme_color.gsub('#', '').scan(/../).map {|color| color.to_i(16)}
+    @theme_color_rgba = @theme_color.gsub('#', '').scan(/../).map {|color| color.to_i(16)}.join(', ')
 
     render file: Rails.root.join('app/themes/', 'theme.css'), content_type: 'text/css'
   end
