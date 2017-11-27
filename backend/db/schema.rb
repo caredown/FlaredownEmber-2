@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121102731) do
+ActiveRecord::Schema.define(version: 20171127171503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20171121102731) do
   create_table "clients", force: :cascade do |t|
     t.string "name",             null: false
     t.string "app_name",         null: false
+    t.string "slug_name",        null: false
     t.string "theme_color"
     t.string "background_color"
     t.text   "term_of_service"
@@ -156,6 +157,16 @@ ActiveRecord::Schema.define(version: 20171121102731) do
     t.boolean  "global",                 default: true
     t.integer  "trackable_usages_count", default: 0
   end
+
+  create_table "tenants", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tenants", ["client_id"], name: "index_tenants_on_client_id", using: :btree
+  add_index "tenants", ["user_id"], name: "index_tenants_on_user_id", using: :btree
 
   create_table "trackable_usages", force: :cascade do |t|
     t.integer  "user_id"
@@ -300,6 +311,8 @@ ActiveRecord::Schema.define(version: 20171121102731) do
   add_index "weathers", ["date", "postal_code"], name: "index_weathers_on_date_and_postal_code", unique: true, using: :btree
 
   add_foreign_key "profiles", "users"
+  add_foreign_key "tenants", "clients"
+  add_foreign_key "tenants", "users"
   add_foreign_key "trackable_usages", "users"
   add_foreign_key "trackings", "users"
   add_foreign_key "user_conditions", "conditions"

@@ -49,6 +49,9 @@ class User < ActiveRecord::Base
   has_many :user_foods, dependent: :destroy
   has_many :foods, through: :user_foods
 
+  has_many :tenants, dependent: :destroy
+  has_many :clients, through: :tenants
+
   has_many :trackings, dependent: :destroy
 
   has_many :trackable_usages, dependent: :destroy
