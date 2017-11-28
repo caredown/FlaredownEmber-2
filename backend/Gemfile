@@ -17,8 +17,7 @@ gem 'pg'
 gem 'mongoid', '~> 5.0.0'
 gem 'where-or'
 
-# Use Puma as the app server
-gem 'puma'
+gem 'unicorn'
 
 # Authentication libraries
 gem 'devise', '~> 3.5.3'
