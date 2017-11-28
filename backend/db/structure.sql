@@ -488,38 +488,6 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
--- Name: tenants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE tenants (
-    id integer NOT NULL,
-    user_id integer,
-    client_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: tenants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE tenants_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: tenants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE tenants_id_seq OWNED BY tenants.id;
-
-
---
 -- Name: trackable_usages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -839,7 +807,8 @@ CREATE TABLE users (
     invited_by_id integer,
     invited_by_type character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    client_id integer
 );
 
 
@@ -984,13 +953,6 @@ ALTER TABLE ONLY tag_translations ALTER COLUMN id SET DEFAULT nextval('tag_trans
 --
 
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY tenants ALTER COLUMN id SET DEFAULT nextval('tenants_id_seq'::regclass);
 
 
 --
@@ -1164,14 +1126,6 @@ ALTER TABLE ONLY tag_translations
 
 ALTER TABLE ONLY tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
-
-
---
--- Name: tenants_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY tenants
-    ADD CONSTRAINT tenants_pkey PRIMARY KEY (id);
 
 
 --
@@ -1361,20 +1315,6 @@ CREATE INDEX index_tag_translations_on_tag_id ON tag_translations USING btree (t
 
 
 --
--- Name: index_tenants_on_client_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_tenants_on_client_id ON tenants USING btree (client_id);
-
-
---
--- Name: index_tenants_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_tenants_on_user_id ON tenants USING btree (user_id);
-
-
---
 -- Name: index_trackable_usages_on_trackable_type_and_trackable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1515,10 +1455,17 @@ CREATE UNIQUE INDEX index_users_on_authentication_token ON users USING btree (au
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_client_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+CREATE INDEX index_users_on_client_id ON users USING btree (client_id);
+
+
+--
+-- Name: index_users_on_email_and_client_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_email_and_client_id ON users USING btree (email, client_id);
 
 
 --
@@ -1598,14 +1545,6 @@ ALTER TABLE ONLY trackable_usages
 
 
 --
--- Name: fk_rails_6666a159dc; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY tenants
-    ADD CONSTRAINT fk_rails_6666a159dc FOREIGN KEY (client_id) REFERENCES clients(id);
-
-
---
 -- Name: fk_rails_7156651ad8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1627,14 +1566,6 @@ ALTER TABLE ONLY user_symptoms
 
 ALTER TABLE ONLY user_foods
     ADD CONSTRAINT fk_rails_8aa2688684 FOREIGN KEY (food_id) REFERENCES foods(id);
-
-
---
--- Name: fk_rails_8af15ce864; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY tenants
-    ADD CONSTRAINT fk_rails_8af15ce864 FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -1755,5 +1686,7 @@ INSERT INTO schema_migrations (version) VALUES ('20170822122800');
 
 INSERT INTO schema_migrations (version) VALUES ('20171121102731');
 
-INSERT INTO schema_migrations (version) VALUES ('20171127171503');
+INSERT INTO schema_migrations (version) VALUES ('20171128081115');
+
+INSERT INTO schema_migrations (version) VALUES ('20171128124837');
 
