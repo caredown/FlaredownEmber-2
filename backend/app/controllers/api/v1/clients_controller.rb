@@ -2,6 +2,8 @@ class Api::V1::ClientsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
+    return unless params[:subdomain].present?
+
     render json: current_tenant, root: 'client'
   end
 

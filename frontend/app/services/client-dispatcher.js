@@ -14,7 +14,11 @@ export default Service.extend({
 
   showForCaredown: config.showForCaredown,
   DOMAINS: config.DOMAINS,
-  caredownSubdomain: typeof location !== 'undefined' && location.host.split('.')[0],
+  caredownSubdomain: computed('location.host', function() {
+    if (typeof location !== 'undefined') {
+      return location.host.split('.')[0];
+    }
+  }),
 
   logoPath: computed('caredownSubdomain', function() {
     const caredownSubdomain = get(this, 'caredownSubdomain');

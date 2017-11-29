@@ -60,8 +60,10 @@ class ApplicationController < ActionController::API
 
   def set_subdomain
     subdomain = request.subdomain
+    return subdomain if subdomain.present?
 
-    subdomain.present? ? subdomain : URI(request.referer).host.split('.').shift
+    referer = request.referer
+    return URI(request.referer).host.split('.').shift if referer.present?
   end
 
   def set_current_tenant(current_tenant_object)
