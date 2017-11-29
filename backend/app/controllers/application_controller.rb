@@ -3,7 +3,9 @@ class ApplicationController < ActionController::API
 
   before_action :authenticate_user_from_token!, if: :presence_of_authentication_token?
   before_action :authenticate_user!, except: [:root]
-  before_action :set_locale, :set_client
+  before_action :set_locale, :set_client_by_subdomain
+
+  helper_method :current_tenant if respond_to?(:helper_method)
 
   def root
     render json: {
@@ -18,9 +20,10 @@ class ApplicationController < ActionController::API
     }
   end
 
-  def set_client
-    subdomain = request.host.split('.')[0]
-    @subdomain ||= request.subdomain
+  def set_client_by_subdomain
+    client = Client.find_by(slug_name: set_subdomain)
+
+    set_current_tenant(client)
   end
 
   protected
@@ -53,5 +56,19 @@ class ApplicationController < ActionController::API
 
   def presence_of_authentication_token?
     authorization[:authentication_token].present?
+  end
+
+  def set_subdomain
+    subdomain = request.subdomain
+
+    subdomain.present? ? subdomain : URI(request.referer).host.split('.').shift
+  end
+
+  def set_current_tenant(current_tenant_object)
+    ActsAsTenant.current_tenant = current_tenant_object
+  end
+
+  def current_tenant
+    ActsAsTenant.current_tenant
   end
 end

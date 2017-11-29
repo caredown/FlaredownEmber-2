@@ -1,23 +1,26 @@
 class Api::V1::ClientsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :find_client
 
   def show
-    render json: @client, root: 'client'
+    render json: current_tenant, root: 'client'
   end
 
   def theme
-    @client ||= Client.last
+    @client = current_tenant
     return unless @client
 
-    @background_color = @client.background_color
     @theme_color = @client.theme_color
-    @theme_color_rgba = @theme_color.gsub('#', '').scan(/../).map {|color| color.to_i(16)}.join(', ')
+    return unless @theme_color
+
+    @background_color = @client.background_color
+    @theme_color_rgba = @theme_color && @theme_color.gsub('#', '').scan(/../).map {|color| color.to_i(16)}.join(', ')
 
     render file: Rails.root.join('app/themes/', 'theme.css'), content_type: 'text/css'
   end
 
-  def find_client
-    @client ||= Client.find_by(slug_name: params[:subdomain])
+  def manifest
+    return unless current_tenant
+
+    render json: WebManifestService.new(current_tenant, request.protocol + request.host_with_port).as_json
   end
 end
