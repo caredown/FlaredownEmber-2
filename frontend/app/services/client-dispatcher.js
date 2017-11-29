@@ -3,6 +3,7 @@ import config from 'flaredown/config/environment';
 
 const {
   get,
+  set,
   computed,
   inject: { service },
   Service,
@@ -12,19 +13,14 @@ const {
 export default Service.extend({
   store: service('store'),
 
+  logoPath: null,
+
   showForCaredown: config.showForCaredown,
   DOMAINS: config.DOMAINS,
   caredownSubdomain: computed('location.host', function() {
     if (typeof location !== 'undefined') {
       return location.host.split('.')[0];
     }
-  }),
-
-  logoPath: computed('caredownSubdomain', function() {
-    const caredownSubdomain = get(this, 'caredownSubdomain');
-    const logoName = get(this, `DOMAINS.${caredownSubdomain}.logo`);
-
-    return logoName && `/assets/clients/${logoName}`;
   }),
 
   fetchData() {
@@ -35,7 +31,9 @@ export default Service.extend({
     if(storedClient) {
       return resolve(storedClient);
     } else {
-      return store.queryRecord('client', { subdomain });
+      return store.queryRecord('client', { subdomain }).then((client) => {
+        return set(this, 'logoPath', get(client, 'logo'));
+      });
     }
   }
 });

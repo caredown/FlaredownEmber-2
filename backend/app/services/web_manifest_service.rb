@@ -7,6 +7,9 @@ class WebManifestService
   end
 
   def as_json
+    logo_url = client.logo.try(:url)
+    src_url = logo_url ? api_url + logo_url : logo_url
+
     {
       name: client.name,
       short_name: client.slug_name,
@@ -16,8 +19,8 @@ class WebManifestService
       theme_color: client.theme_color,
       description: "A simply symptom tracker",
       icons: [{
-        src: api_url + client.logo.url,
-        type: client.logo.content_type
+        src: src_url,
+        type: client.logo.try(:content_type)
       }]
     }
   end

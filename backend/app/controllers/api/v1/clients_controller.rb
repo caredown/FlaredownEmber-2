@@ -4,7 +4,7 @@ class Api::V1::ClientsController < ApplicationController
   def show
     return unless params[:subdomain].present?
 
-    render json: current_tenant, root: 'client'
+    render json: current_tenant, root_url: root_url, root: 'client'
   end
 
   def theme
@@ -23,6 +23,10 @@ class Api::V1::ClientsController < ApplicationController
   def manifest
     return unless current_tenant
 
-    render json: WebManifestService.new(current_tenant, request.protocol + request.host_with_port).as_json
+    render json: WebManifestService.new(current_tenant, root_url).as_json
+  end
+
+  def root_url
+    request.protocol + request.host_with_port
   end
 end
