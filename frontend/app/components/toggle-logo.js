@@ -12,6 +12,9 @@ const {
 
 export default Component.extend({
   logoVisiability: service(),
+  clientDispatcher: service(),
+
   showHeaderLogo: alias('logoVisiability.showHeaderLogo'),
   showHeaderPath: alias('logoVisiability.showHeaderPath'),
+  logoPath: alias('clientDispatcher.logoPath'),
 });

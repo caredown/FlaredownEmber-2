@@ -11,12 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822122800) do
+ActiveRecord::Schema.define(version: 20171128124837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
   enable_extension "hstore"
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name",             null: false
+    t.string "app_name",         null: false
+    t.string "slug_name",        null: false
+    t.string "theme_color"
+    t.string "background_color"
+    t.text   "term_of_service"
+    t.text   "privacy_policy"
+    t.string "logo"
+  end
 
   create_table "condition_translations", force: :cascade do |t|
     t.integer  "condition_id", null: false
@@ -265,10 +276,12 @@ ActiveRecord::Schema.define(version: 20170822122800) do
     t.string   "invited_by_type"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "client_id"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["client_id"], name: "index_users_on_client_id", using: :btree
+  add_index "users", ["email", "client_id"], name: "index_users_on_email_and_client_id", using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 

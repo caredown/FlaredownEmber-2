@@ -10,13 +10,6 @@
     onStepCompleted=(action 'moveToNextStep')
   }}
 
-{{else if isDemographic}}
-  {{onboarding/demographic-step
-    step=step
-    onGoBack=(action 'moveToPrevStep')
-    onStepCompleted=(action 'moveToNextStep')
-  }}
-
 {{else if isConditions}}
   {{onboarding/conditions-step
     step=step

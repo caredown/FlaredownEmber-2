@@ -1,0 +1,168 @@
+/* layout */
+body { background: <%= @background_color %> }
+
+a { color: <%= @theme_color %> }
+a:hover { color: rgba(0, 0, 0, 0.6) }
+
+.nav.unauthenticatedNav {
+  background: rgba(<%= @theme_color_rgba + ', 0.1' %>);
+}
+
+.nav.unauthenticatedNav h5 {
+  color: <%= @theme_color %>;
+}
+
+@media screen and (max-width: 600px) {
+.nav.unauthenticatedNav {
+    border-bottom: 1px solid <%= @theme_color %>;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .nav.unauthenticatedNav {
+    border: 1px solid <%= @theme_color %>;
+  }
+}
+
+/* Onboarding pages */
+.step-controls .back button, .step-controls .forward button {
+  background-color: <%= @theme_color %>
+}
+.step-controls .back button:hover,
+.step-controls .back button:focus,
+.step-controls .forward button:hover,
+.step-controls .forward button:focus {
+  background-color: rgba(<%= @theme_color_rgba + ', 0.6' %>)
+}
+
+.flaredown-white-box .tip { background: rgba(<%= @theme_color_rgba + ', 0.1' %>) }
+h6.trackable:before { color: <%= @theme_color %> }
+
+/* pace-theme-minimal */
+.pace .pace-progress {
+  background: <%= @theme_color %>;
+}
+
+.search-resource {
+  span { color: <%= @theme_color %> }
+}
+.typeTopickable { color: $grey }
+
+.join-footer { background: <%= @theme_color %> }
+
+
+/* _btn-group */
+.btn-group button {
+  background-color: rgba(<%= @theme_color_rgba + ', 0.6' %>);
+}
+.btn-group button.active {
+  background-color: <%= @theme_color %>;
+}
+
+
+/* _bottom_nav */
+.bottom-nav .bottom-link.active label {
+  color: <%= @theme_color %>;
+}
+
+.bottom-nav .bottom-link.active .icon * {
+  fill: <%= @theme_color %>;
+}
+
+
+/* global */
+.tip {
+  background: #ECF7F6;
+  color: <%= @theme_color %>;
+  border: 1px solid <%= @theme_color %>;
+}
+
+.primary-btn { background-color: <%= @theme_color %> }
+.primary-btn:hover /*{ background-color: rgba(0, 0, 0, 0.5) }*/
+.primary-btn:focus { background-color: rgba(0, 0, 0, 0.5) }
+
+.unreadNotification { background: lighten(<%= @theme_color %>, 40%) }
+
+input[type="submit"] { background-color: <%= @theme_color %> }
+input[type="submit"]:hover { background-color: rgba(<%= @theme_color_rgba + ', 0.6' %>) }
+
+
+/* settings page */
+.ember-power-select-option[aria-current="true"] { background-color: <%= @theme_color %> }
+
+input.ember-power-select-search-input:focus {
+  border-color: <%= @theme_color %>;
+  box-shadow: 0 0 5px <%= @theme_color %>;
+}
+
+.colorable-bg-35 { background-color: <%= @theme_color %> !important }
+
+.picker__list-item--selected,
+.picker--focused .picker__list-item--selected {
+  background: #dddddd;
+  border: none;
+}
+.picker__list-item:hover {
+  background: <%= @theme_color %>;
+  border: none;
+}
+
+/* Search navigation bar */
+.search-resource span { color: <%= @theme_color %> }
+.search-resource > a > svg > path { fill: <%= @theme_color %> }
+
+
+/* spiner */
+.sk-three-bounce .sk-child {
+  background-color: <%= @theme_color %>;
+}
+
+
+/* History page */
+
+/* pattern page */
+.pattern-block span.pattern-edit {
+  color: <%= @theme_color %>;
+}
+
+.flaredown-svg-group .tooltip-area .tooltip-header {
+  background-color: rgba(<%= @theme_color_rgba + ', 0.24' %>);
+}
+
+.tooltip-header > a > svg {
+  fill: <%= @theme_color %>;
+  width: 12px;
+  height: 18px;
+}
+
+.choosen-object .regular { color: <%= @theme_color %> }
+.history-btn { background-color: <%= @theme_color %> }
+.history-btn:hover { background-color: rgba(<%= @theme_color_rgba + ', 0.6' %>) }
+
+/* chart-navigation */
+.chart-navigation .left-arrow  a svg * { fill: <%= @theme_color %> }
+.chart-navigation .rigth-arrow a svg * { fill: <%= @theme_color %> }
+.chart-navigation svg.eye-icon * { fill: <%= @theme_color %> }
+.chart-navigation span { color:  <%= @theme_color %> }
+.chart-navigation .calendar .calendarItem { border: 2px solid <%= @theme_color %> }
+
+
+/* Shared Patterns page */
+/* dialog */
+.sharedPatternsDialog .sharedPatternList .sharedPatternBtn:disabled:hover {
+  background-color: rgba(<%= @theme_color_rgba + ', 0.6' %>);
+}
+
+
+/* Checkin pages */
+/* checkin-navigation */
+.checkin-navigation a.active { color: <%= @theme_color %> }
+
+/* summary */
+.checkin-summary .summary-title { color: <%= @theme_color %> }
+.checkin-days-nav .yesterday a,
+.checkin-days-nav .tomorrow a { color: <%= @theme_color %> }
+.checkin-days-nav .checkin-date { color: <%= @theme_color %> }
+
+/* nav top */
+.flex-container.left-nav > a > svg * { fill: <%= @theme_color %> }

@@ -1,6 +1,16 @@
 import Ember from 'ember';
 import CheckinByDate from 'flaredown/mixins/checkin-by-date';
 
-export default Ember.Component.extend(CheckinByDate, {
+const {
+  computed: { alias },
+  inject: { service },
+  Component
+} = Ember;
+
+export default Component.extend(CheckinByDate, {
   classNames: 'navigation-bar',
+  clientDispatcher: service(),
+
+  logoPath: alias('clientDispatcher.logoPath'),
+  showForCaredown: alias('clientDispatcher.showForCaredown'),
 });

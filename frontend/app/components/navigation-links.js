@@ -25,8 +25,11 @@ export default Component.extend(SearchableDropdown, {
 
   notifications: service(),
   routeHistory:  service(),
+  clientDispatcher: service(),
   _routing:      service('-routing'),
+
   postId: alias('notifications.first.postId'),
+  showForCaredown: alias('clientDispatcher.showForCaredown'),
 
   click() {
     if(!get(this, 'isAuthenticatedUser')) {

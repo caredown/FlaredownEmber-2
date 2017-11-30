@@ -16,8 +16,10 @@ module.exports = function(environment) {
       }
     },
 
+    showForCaredown: true,
+
     fastboot: {
-      hostWhitelist: ['flaredown-webapp.herokuapp.com', 'staging.flaredown.com', 'app.flaredown.com', 'flaredown-staging-webapp.herokuapp.com', /^localhost:\d+$/]
+      hostWhitelist: [/[a-zA-Z0-9.-]*.mydomain.com:4300|[a-zA-Z0-9.-]*.caredown.com|localhost:4300/]
     },
 
     torii: {
