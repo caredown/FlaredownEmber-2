@@ -13,9 +13,8 @@ class WebManifestService
     {
       name: client.name,
       short_name: client.slug_name,
-      start_url: ".",
       display: "standalone",
-      background_color: client.background_color,
+      background_color: client.background_color || '',
       theme_color: client.theme_color,
       description: "A simply symptom tracker",
       icons: [{
