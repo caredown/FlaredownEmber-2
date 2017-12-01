@@ -5,10 +5,18 @@ class NotificationsMailer < ApplicationMailer
 
   def notify(notification_hash)
     @email = notification_hash[:email]
-    @unsubscribe_link = Rails.application.secrets.base_url + "/unsubscribe/#{User.find_by(email: @email).notify_token}"
+    user = User.find_by(email: @email)
+
+    client = user.client
+    return unless client
+
+    subdomain = notification_hash[:subdomain] || client.slug_name
+    return unless subdomain
+
+    @unsubscribe_link = client_url(subdomain) + "/unsubscribe/#{user.notify_token}"
     @data = notification_hash[:data]
 
-    mail(to: @email, subject: "New response to your Flaredown message")
+    mail(to: @email, subject: "New response to your #{client.app_name} message")
   end
 
   def resource_title(object_id, class_name = 'Post')

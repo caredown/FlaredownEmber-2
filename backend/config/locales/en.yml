@@ -58,10 +58,10 @@ en:
       subject:  "Your Flaredown data is here"
 
   checkin_reminder_mailer:
-    subject: "It's time to check in to Flaredown"
+    subject: "It\'s time to check in to %{app_name}"
     body:
-      text: 'Open your Flaredown app to check in or..'
-      bottom: 'You opted to receive daily check-in reminders in Flaredown.'
+      text: 'Open your %{app_name} app to check in or..'
+      bottom: 'You opted to receive daily check-in reminders in %{app_name}.'
       link:
         unsubscribe: 'Click here to turn this reminder off.'
 
