@@ -13,15 +13,15 @@ export default Route.extend(ApplicationRouteMixin, {
   notifications: service(),
   session: service(),
 
-  beforeModel() {
-    get(this, 'notifications').loadNotifications();
-  },
+  // beforeModel() {
+  //   get(this, 'notifications').loadNotifications();
+  // },
 
-  sessionAuthenticated() {
-    this._super(...arguments);
+  // sessionAuthenticated() {
+  //   this._super(...arguments);
 
-    get(this, 'notifications').loadNotifications();
-  },
+  //   get(this, 'notifications').loadNotifications();
+  // },
 
   actions: {
     routeToLogin() {
