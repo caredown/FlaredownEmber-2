@@ -8,13 +8,12 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def theme
-    @client = current_tenant
-    return unless @client
+    return unless current_tenant
 
-    @theme_color = @client.theme_color
+    @theme_color = current_tenant.theme_color
     return unless @theme_color
 
-    @background_color = @client.background_color
+    @background_color = current_tenant.background_color
     @theme_color_rgba = @theme_color && @theme_color.gsub('#', '').scan(/../).map {|color| color.to_i(16)}.join(', ')
 
     render file: Rails.root.join('app/themes/', 'theme.css'), content_type: 'text/css'
