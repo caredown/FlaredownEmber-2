@@ -15,11 +15,13 @@ const {
 
 export default Component.extend({
   i18n: service(),
+  clientDispatcher: service(),
 
   classNames: ['flaredown-white-box', 'sharedPatternsDialog'],
 
   secretPhrase: config.encryptionSecret,
-  staticUrl: config.staticUrl,
+  baseProtocol: config.baseProtocol,
+  baseDomain: config.baseDomain,
   loadingPatterns: false,
   page: 2,
 
@@ -35,7 +37,7 @@ export default Component.extend({
     const checkedPatternIds = get(this, 'checkedPatterns.[]').map((pattern) => pattern.id);
     const encryptedParams = CryptoJS.AES.encrypt(checkedPatternIds.join(', '), get(this, 'secretPhrase'));
 
-    return `${get(this, 'staticUrl')}/patterns/${encodeURIComponent(encryptedParams)}`;
+    return `${get(this, 'baseProtocol')}${get(this, 'clientDispatcher.caredownSubdomain')}.${get(this, 'baseDomain')}/patterns/${encodeURIComponent(encryptedParams)}`;
   }),
 
   actions: {
