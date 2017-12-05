@@ -24,6 +24,9 @@ class CheckinReminderMailer < ApplicationMailer
     attachments.inline['attachment'] =
      @client_logo.present? ? File.read(@client_logo.path) : File.read('public/images/optional_email_img.png')
 
-    mail(to: @email, subject: I18n.t('checkin_reminder_mailer.subject', app_name: @app_name))
+    mail(to: @email,
+         subject: I18n.t('checkin_reminder_mailer.subject',
+         app_name: @app_name),
+         from: "#{@client.app_name} #{ENV['SMTP_EMAIL_FROM_COMMON']}")
   end
 end
