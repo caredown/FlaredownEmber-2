@@ -5,7 +5,7 @@
     <h1><%= I18n.t('checkin_reminder_mailer.subject', app_name: @app_name) %></h1>
 
     <div class="opt_img">
-      <%= image_tag attachments['attachment'].url %>
+      <%= image_tag attachments['attachment.png'].url %>
     </div>
 
     <p><%= I18n.t('checkin_reminder_mailer.body.text', app_name: @app_name) %></p>

@@ -21,12 +21,9 @@ class CheckinReminderMailer < ApplicationMailer
     @unsubscribe_link = @click_here_link + "/unsubscribe/#{@notify_token}?stop_remind"
     @client_logo = @client.logo
 
-    attachments.inline['attachment'] =
-     @client_logo.present? ? File.read(@client_logo.path) : File.read('public/images/optional_email_img.png')
+    attachments.inline['attachment.png'] =
+      @client_logo.present? ? File.read("public#{@client_logo.url}") : File.read('public/images/optional_email_img.png')
 
-    mail(to: @email,
-         subject: I18n.t('checkin_reminder_mailer.subject',
-         app_name: @app_name),
-         from: "#{@client.app_name} #{ENV['SMTP_EMAIL_FROM_COMMON']}")
+    mail(to: @email, subject: I18n.t('checkin_reminder_mailer.subject', app_name: @app_name))
   end
 end
