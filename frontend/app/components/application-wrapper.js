@@ -18,10 +18,16 @@ export default Component.extend({
   },
 
   _loaded(client) {
-    const appName = get(client, 'appName')
-
     if (typeof Fastboot === 'undefined') {
-      $('title')[0].text = appName;
+      this.setClientMeta(client);
     }
   },
+
+  setClientMeta(client) {
+    const appName = get(client, 'appName');
+
+    $('#appTitle')[0].text = appName;
+    $('#apple-appTitle')[0].content = appName;
+    $('#apple-icon')[0].href = get(client, 'logoPath');
+  }
 });
