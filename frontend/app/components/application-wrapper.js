@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import config from 'flaredown/config/environment';
 
 const {
+  $,
   get,
   inject: { service },
   Component,
@@ -28,6 +28,6 @@ export default Component.extend({
 
     $('#appTitle')[0].text = appName;
     $('#apple-appTitle')[0].content = appName;
-    $('#apple-icon')[0].href = get(client, 'logoPath');
+    $('#apple-appIcon')[0].href = get(client, 'logoPath');
   }
 });
