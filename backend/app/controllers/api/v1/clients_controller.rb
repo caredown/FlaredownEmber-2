@@ -14,14 +14,14 @@ class Api::V1::ClientsController < ApplicationController
     return unless @theme_color
 
     @background_color = current_tenant.background_color
-    @theme_color_rgba = @theme_color && @theme_color.gsub('#', '').scan(/../).map {|color| color.to_i(16)}.join(', ')
+    @theme_color_rgba = @theme_color && @theme_color.delete('#').scan(/../).map { |color| color.to_i(16) }.join(', ')
 
     render file: Rails.root.join('app/themes/', 'theme.css'), content_type: 'text/css'
   end
 
   def manifest
     # return unless current_tenant
-    render json: {key: 'no tenant'} unless current_tenant
+    render json: { key: 'no tenant' } unless current_tenant
 
     render json: WebManifestService.new(current_tenant, root_url).as_json if current_tenant
   end

@@ -3,7 +3,6 @@ import config from 'flaredown/config/environment';
 
 const {
   get,
-  set,
   computed,
   inject: { service },
   Service,

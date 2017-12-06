@@ -31,7 +31,7 @@ class UserSerializer < ApplicationSerializer
   has_one :profile, embed_in_root: true
 
   def topic_following_id
-    [] # TODO object.topic_following.id
+    [] # TO DO object.topic_following.id
   end
 
   def intercom_hash
