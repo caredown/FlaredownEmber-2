@@ -7,6 +7,7 @@ const {
   computed,
   inject: { service },
   Service,
+  setProperties,
   RSVP: { resolve }
 } = Ember;
 
@@ -14,6 +15,7 @@ export default Service.extend({
   store: service('store'),
 
   logoPath: null,
+  appName: null,
 
   showForCaredown: config.showForCaredown,
   DOMAINS: config.DOMAINS,
@@ -32,7 +34,7 @@ export default Service.extend({
       return resolve(storedClient);
     } else {
       return store.queryRecord('client', { subdomain }).then((client) => {
-        return set(this, 'logoPath', get(client, 'logo'));
+        return setProperties(this, { logoPath: get(client, 'logo'), appName: get(client, 'appName') });
       });
     }
   }

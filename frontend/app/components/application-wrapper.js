@@ -3,7 +3,6 @@ import config from 'flaredown/config/environment';
 
 const {
   get,
-  set,
   inject: { service },
   Component,
 } = Ember;
@@ -12,15 +11,17 @@ export default Component.extend({
   clientDispatcher: service(),
   store: service(),
 
-  DOMAINS: config.DOMAINS,
-  properties: {},
+  init() {
+    this._super(...arguments);
 
-  didInsertElement() {
-    const store = get(this, 'store');
-    const domains = get(this, 'DOMAINS');
-    const subdomain = get(this, 'clientDispatcher.caredownSubdomain');
-    get(this, 'clientDispatcher.fetchData');
+    get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this));
+  },
 
-    store.queryRecord('client', { subdomain: subdomain });
+  _loaded(client) {
+    const appName = get(client, 'appName')
+
+    if (typeof Fastboot === 'undefined') {
+      $('title')[0].text = appName;
+    }
   },
 });
