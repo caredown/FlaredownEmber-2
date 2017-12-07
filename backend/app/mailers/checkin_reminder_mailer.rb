@@ -14,7 +14,7 @@ class CheckinReminderMailer < ApplicationMailer
     return unless @client
 
     @subdomain = @client.slug_name
-    @app_name = @client.app_name.to_S
+    @app_name = @client.app_name.to_s
 
     @click_here_link = client_url(@subdomain)
 
@@ -24,6 +24,8 @@ class CheckinReminderMailer < ApplicationMailer
     attachments.inline['attachment.png'] =
       @client_logo.present? ? File.read("public#{@client_logo.url}") : File.read('public/images/optional_email_img.png')
 
-    mail(to: @email, subject: I18n.t('checkin_reminder_mailer.subject', app_name: @app_name))
+    email_from = [@app_name, ENV['SMTP_EMAIL_FROM']].join(' ')
+
+    mail(to: @email, from: email_from, subject: I18n.t('checkin_reminder_mailer.subject', app_name: @app_name))
   end
 end
