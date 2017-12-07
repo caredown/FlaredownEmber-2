@@ -14,7 +14,7 @@ class CheckinReminderMailer < ApplicationMailer
     return unless @client
 
     @subdomain = @client.slug_name
-    @app_name = @client.app_name.to_S
+    @app_name = @client.app_name.to_s
 
     @click_here_link = client_url(@subdomain)
 
