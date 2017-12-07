@@ -4,6 +4,10 @@
       {{navigation-bar}}
     {{else}}
       {{toggle-logo currentPath=currentPath}}
+
+      {{#if (or (eq currentPath 'login') (eq currentPath 'signup') (eq currentPath 'password.reset'))}}
+        <h4>{{client-appname}}</h4>
+      {{/if}}
     {{/if}}
   </header>
 {{/unless}}
