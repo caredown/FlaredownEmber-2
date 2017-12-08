@@ -5,9 +5,9 @@ export default Ember.Mixin.create(AuthenticatedRouteMixin, {
 
   init() {
     this._super(...arguments);
-    if(this.get('session.userEngageInitialized') === false) {
-      this.setUserEngage();
-    }
+
+    // ToDo Enable when get USERENGAGE_API_KEY like on origin repo
+
     if(this.get('session.fullStoryInitialized') === false) {
       this.setFullStoryUser();
     }
