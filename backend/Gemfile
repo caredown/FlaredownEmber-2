@@ -16,6 +16,7 @@ gem 'active_model_serializers', '0.9.3'
 gem 'pg'
 gem 'mongoid', '~> 5.1.0'
 gem 'where-or'
+gem 'unicorn'
 
 gem 'unicorn'
 
