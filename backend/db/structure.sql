@@ -70,7 +70,9 @@ CREATE TABLE clients (
     background_color character varying,
     term_of_service text,
     privacy_policy text,
-    logo character varying
+    logo character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -1687,4 +1689,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170822122800');
 INSERT INTO schema_migrations (version) VALUES ('20171121102731');
 
 INSERT INTO schema_migrations (version) VALUES ('20171128081115');
+
+INSERT INTO schema_migrations (version) VALUES ('20171212110911');
 

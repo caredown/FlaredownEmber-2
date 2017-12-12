@@ -33,7 +33,11 @@ export default Service.extend({
       return resolve(storedClient);
     } else {
       return store.queryRecord('client', { subdomain }).then((client) => {
-        return setProperties(this, { logoPath: get(client, 'logo'), appName: get(client, 'appName') });
+        if (client) {
+          return setProperties(this, { logoPath: get(client, 'logo'), appName: get(client, 'appName') });
+        } else {
+          return {};
+        }
       });
     }
   }
