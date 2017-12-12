@@ -9,7 +9,6 @@ module Authenticatable
            :rememberable,
            :recoverable,
            :trackable,
-           :validatable,
            :invitable,
            :omniauthable
 
@@ -17,5 +16,8 @@ module Authenticatable
     # Validates
     #
     validates :password, confirmation: true
+    validates :email, uniqueness: { scope: :client_id, allow_blank: false },
+                      format: { with: Devise.email_regexp },
+                      presence: true
   end
 end

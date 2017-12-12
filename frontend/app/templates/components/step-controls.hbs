@@ -1,4 +1,4 @@
-<div class="back container step-back">
+<div class="{{if isChartHidden 'hiddenBlock' 'back container step-back'}}">
   {{#if (and showBack stepHasPrev)}}
     <a class="{{if disabled 'disabled'}}" {{action "backward"}}>{{backLabel}}</a>
   {{else if (not showBack stepHasPrev)}}

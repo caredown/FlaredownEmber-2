@@ -16,8 +16,10 @@ module.exports = function(environment) {
       }
     },
 
+    showForCaredown: true,
+
     fastboot: {
-      hostWhitelist: ['flaredown-webapp.herokuapp.com', 'staging.flaredown.com', 'app.flaredown.com', 'flaredown-staging-webapp.herokuapp.com', /^localhost:\d+$/]
+      hostWhitelist: [/[a-zA-Z0-9.-]*.mydomain.com:4300|[a-zA-Z0-9.-]*.caredown.com|localhost:4300/]
     },
 
     torii: {
@@ -69,6 +71,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.apiHost = 'http://localhost:3000';
     var STATIC_URL = 'http://localhost:4300';
+    var BASE_PROTOCOL = 'http://';
+    var BASE_DOMAIN = 'stg.mydomain.com:4300';
   }
 
   if (environment === 'test') {
@@ -91,6 +95,8 @@ module.exports = function(environment) {
 
     ENV.apiHost = process.env.API_HOST;
     var STATIC_URL = process.env.STATIC_URL;
+    var BASE_PROTOCOL = process.env.BASE_PROTOCOL;
+    var BASE_DOMAIN = process.env.BASE_DOMAIN;
 
     ENV.airbrake = {
       host: process.env.AIRBRAKE_HOST,
@@ -100,6 +106,8 @@ module.exports = function(environment) {
   }
 
   ENV.staticUrl = STATIC_URL;
+  ENV.baseProtocol = BASE_PROTOCOL;
+  ENV.baseDomain = BASE_DOMAIN;
 
   return ENV;
 };

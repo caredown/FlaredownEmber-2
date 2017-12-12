@@ -3,7 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Flaredown</title>
+
+    <title id="appTitle"></title>
+    <meta id="apple-appTitle" name="apple-mobile-web-app-title">
+    <meta id="apple-appCapable" name="apple-mobile-web-app-capable" content="yes">
+    <link id="apple-appIcon" rel="apple-touch-icon">
+
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,6 +16,8 @@
 
     <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link rel="stylesheet" href="{{rootURL}}assets/flaredown.css">
+    <link rel="stylesheet" href="/api/clients/theme">
+    <link rel="manifest"   href="/api/clients/manifest.json">
 
     {{content-for "head-footer"}}
   </head>

@@ -6,7 +6,9 @@
   {{checkin/weather-step}}
 </div>
 
-{{checkin/summary-posts}}
+{{#if (not showForCaredown)}}
+  {{checkin/summary-posts}}
+{{/if}}
 
 {{step-controls step=step
                 showBack=false

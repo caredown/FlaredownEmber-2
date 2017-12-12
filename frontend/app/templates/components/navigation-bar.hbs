@@ -1,13 +1,10 @@
 <div class="navigation-wrapper">
-  {{#link-to "index" class="logo"}}<img src="/assets/logo.svg">{{/link-to}}
+  {{#link-to "index" class="logo"}}{{client-logo logoPath=logoPath}}{{/link-to}}
 
   <nav role="navigation">
     <ul class="navigation-menu">
       <li class="nav-link"><a href="#" {{action "goToTodaysCheckin"}}>Checkin</a></li>
       <li class="nav-link">{{#link-to "chart"}}History{{/link-to}}</li>
-      {{#if session.currentUser}}
-        <li class="nav-link">{{#link-to "posts"}}Discuss{{/link-to}}</li>
-      {{/if}}
       <li class="nav-link">{{#link-to "settings"}}Settings{{/link-to}}</li>
     </ul>
   </nav>

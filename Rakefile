@@ -17,7 +17,7 @@ task :run do
   end
 end
 
-{ production: 'flaredown', staging: 'flaredown-staging'}.each do |env, application|
+{ production: 'caredown', staging: 'caredown-staging'}.each do |env, application|
   namespace env.to_sym do
     desc "restart application"
     task :restart do

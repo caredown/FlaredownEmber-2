@@ -14,7 +14,7 @@ gem 'active_model_serializers', '0.9.3'
 
 # Use postgresql and mongo as the database for Active Record
 gem 'pg'
-gem 'mongoid', '~> 5.0.0'
+gem 'mongoid', '~> 5.1.0'
 gem 'where-or'
 
 # Use Puma as the app server
@@ -65,12 +65,15 @@ gem 'kaminari-mongoid'
 gem 'kaminari-actionview'
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'carrierwave', '~> 1.0'
+gem 'acts_as_tenant'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   gem 'database_cleaner', '~> 1.5.1'
-  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'factory_girl_rails', '~> 4.9.0'
   # Generate Fake data
   gem 'ffaker', '~> 2.0.0'
   gem 'rspec-rails', '~> 3.3.0'

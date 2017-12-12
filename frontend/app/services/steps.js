@@ -21,7 +21,6 @@ export default Service.extend({
 
   onboardingSeed: [
     'personal',
-    'demographic',
     'conditions',
     'symptoms',
     'treatments',

@@ -28,6 +28,8 @@
 class User < ActiveRecord::Base
   include Authenticatable
 
+  acts_as_tenant(:client)
+
   #
   # Associations
   #

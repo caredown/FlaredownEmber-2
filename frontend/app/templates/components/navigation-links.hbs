@@ -7,19 +7,22 @@
 <h5 class="centered page-title">{{if isAuthenticatedUser title 'Join our awesome community!'}}</h5>
 
 <div class="flex-container right-nav">
-  <a href="/" {{action "toggleSearchBar"}}>
-    {{inline-svg 'discussion-search' class='icon'}}
-  </a>
+  {{#if (not showForCaredown)}}
+    <a href="/" {{action "toggleSearchBar"}}>
+      {{inline-svg 'discussion-search' class='icon'}}
+    </a>
+  {{/if}}
+
   {{#link-to 'posts.profile'}}{{inline-svg 'discussion-profile' class='icon'}}{{/link-to}}
 
-  {{#if session.currentUser}}
+  {{#if (and session.currentUser (not showForCaredown))}}
     {{#link-to 'notifications' class=(if notifications.unread 'notification' '')}}
       {{inline-svg 'discussion-notification' class='icon'}}
     {{/link-to}}
   {{/if}}
 </div>
 
-{{#if showSearch}}
+{{#if (and showSearch (not showForCaredown))}}
   <div class="flex-container search-resource">
     {{#power-select
       class="fs-private"

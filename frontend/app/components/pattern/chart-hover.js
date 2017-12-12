@@ -178,11 +178,12 @@ export default Component.extend({
     let tooltipLeft = x <= hoverCenter ? (x + tooltipLeftOffset) : (x - tooltipLeftOffset - tooltipArea.width() - get(this, 'backgroundMargin.left'));
 
     const isAuthor = get(this, 'session.email') === get(this, 'data.author_email');
+    const rightArrow = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.55 21.09"><title>arrow-right_1</title><path d="M9.38,11L0.54,19.84A1,1,0,0,0,2,21.25l9.55-9.55a1,1,0,0,0,0-1.41L2,0.75A1,1,0,0,0,.54,2.16Z" transform="translate(-0.25 -0.45)"/></svg>';
 
     const headerBody = (get(this, 'session.isAuthenticated') && isAuthor) ?
       `<a href=/checkin?date=${xValueFormatted}>
         <b>${xValue.format(get(this, 'dateFormat'))}</b>
-        <img src="/assets/nav_icons/arrow-right.svg">
+        ${rightArrow}
         </a>` :
         `<b>${xValue.format(get(this, 'dateFormat'))}</b>`;
 
