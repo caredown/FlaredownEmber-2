@@ -1,5 +1,5 @@
 class ClientCreator
-  attr_accessor :email, :name, :app_name, :slug_name, :theme_color, :background_color, :password
+  attr_accessor :email, :name, :app_name, :slug_name, :theme_color, :background_color, :password, :user
 
   def initialize(options)
     @email = options[:email]
@@ -9,12 +9,12 @@ class ClientCreator
     @theme_color = options[:theme_color]
     @background_color = options[:background_color]
     @password = options[:password]
+
+    @user = User.find_by(id: options[:user_id])
   end
 
   def create
     ActiveRecord::Base.transaction do
-      user = User.create!(email: email, password: password, password_confirmation: password)
-
       @client = user.create_client!(name: name,
         app_name: app_name,
         slug_name: slug_name,

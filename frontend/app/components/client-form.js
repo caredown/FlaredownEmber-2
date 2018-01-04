@@ -29,6 +29,17 @@ export default Component.extend({
     }
   },
 
+  createClient(userId) {
+    this.get('store').createRecord('client', {
+      name: get(this, 'name'),
+      appName: get(this, 'appName'),
+      slugName: get(this, 'slugName'),
+      themeColor: get(this, 'themeColor'),
+      backgroundColor: get(this, 'backgroundColor'),
+      userId: userId
+    }).save();
+  },
+
   actions: {
     fillSlugName() {
       let slugName = get(this, 'model.slugName');
@@ -44,14 +55,14 @@ export default Component.extend({
 
     save() {
       let model = get(this, 'model');
-
       const { email, password } = getProperties(model, 'email', 'password');
       const slugName = get(this, 'slugName');
 
-      setProperties(model, { passwordConfirmation: password, slugName: slugName });
+      set(model, 'passwordConfirmation', password);
 
       model
         .save()
+        .then((user) => this.createClient(get(user, 'id')))
         .then(() => set(this, 'processedMessage', t("clientAccess.signupMessage")));
     },
   }

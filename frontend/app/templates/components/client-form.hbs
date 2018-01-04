@@ -11,11 +11,11 @@
     {{/form-field}}
 
     {{#form-field for="name" label="Name"}}
-      {{input type="text" value=model.name placeholder="Enter Client Name"}}
+      {{input type="text" value=name placeholder="Enter Client Name"}}
     {{/form-field}}
 
     {{#form-field for="appName" label="Application Name"}}
-      {{input class='clientAppName' type="text" value=model.appName placeholder="Enter Client Application Name" focus-out=(action 'fillSlugName')}}
+      {{input class='clientAppName' type="text" value=appName placeholder="Enter Client Application Name" focus-out=(action 'fillSlugName')}}
     {{/form-field}}
 
     {{#form-field for="slugName" label="Subdomain"}}
@@ -23,11 +23,11 @@
     {{/form-field}}
 
     {{#form-field for="themeColor" label="Theme Color"}}
-      {{input type="text" value=model.themeColor placeholder="Enter Theme Color"}}
+      {{input type="text" value=themeColor placeholder="Enter Theme Color"}}
     {{/form-field}}
 
     {{#form-field for="backgroundColor" label="Background Color"}}
-      {{input type="text" value=model.backgroundColor placeholder="Enter Background Color"}}
+      {{input type="text" value=backgroundColor placeholder="Enter Background Color"}}
     {{/form-field}}
 
     {{#form-field for="password" label="Password"}}

@@ -7,6 +7,6 @@ const {
 
 export default Route.extend(UnauthenticatedRouteMixin, {
   model() {
-    return this.store.createRecord('client');
+    return this.store.createRecord('registration');
   },
 });
