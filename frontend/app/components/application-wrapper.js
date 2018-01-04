@@ -3,18 +3,25 @@ import Ember from 'ember';
 const {
   $,
   get,
+  computed: { alias },
   inject: { service },
   Component,
 } = Ember;
 
 export default Component.extend({
   clientDispatcher: service(),
+  hasNoSubdomain: alias('clientDispatcher.isEmptySubdomain'),
+
   store: service(),
 
   init() {
     this._super(...arguments);
 
-    get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this));
+    if(get(this, 'hasNoSubdomain')){
+      return;
+    } else {
+      get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this));
+    }
   },
 
   _loaded(client) {

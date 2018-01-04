@@ -3,7 +3,9 @@
 
   {{outlet}}
 
-  {{partial "application/footer"}}
+  {{#if hasNoSubdomain}}
+    {{partial "application/footer"}}
+  {{/if}}
 
   {{#if session.isAuthenticated}}
     {{bottom-nav}}

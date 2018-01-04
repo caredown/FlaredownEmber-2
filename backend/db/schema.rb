@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212110911) do
+ActiveRecord::Schema.define(version: 20180104103858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20171212110911) do
   enable_extension "hstore"
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name",             null: false
-    t.string   "app_name",         null: false
-    t.string   "slug_name",        null: false
+    t.string   "name",                             null: false
+    t.string   "app_name",                         null: false
+    t.string   "slug_name",                        null: false
     t.string   "theme_color"
     t.string   "background_color"
     t.text     "term_of_service"
@@ -29,7 +29,11 @@ ActiveRecord::Schema.define(version: 20171212110911) do
     t.string   "logo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.boolean  "approved",         default: false
   end
+
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "condition_translations", force: :cascade do |t|
     t.integer  "condition_id", null: false

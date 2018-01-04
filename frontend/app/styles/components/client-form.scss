@@ -1,0 +1,13 @@
+.client-form {
+  @include outer-container;
+  @include single-col;
+
+  .signupMsg {
+    text-align: center;
+  }
+
+  input[type=submit] {
+    margin-top: 2em;
+  }
+}
+

@@ -24,6 +24,12 @@ export default Service.extend({
     }
   }),
 
+  isEmptySubdomain: computed('caredownSubdomain', function() {
+    const subdomain = get(this, 'caredownSubdomain');
+
+    return !!(subdomain == 'stg' || subdomain == 'caredown')
+  }),
+
   fetchData() {
     const store = get(this, 'store');
     const subdomain = get(this, 'caredownSubdomain');

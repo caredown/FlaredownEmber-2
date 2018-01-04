@@ -7,6 +7,13 @@ class Api::V1::ClientsController < ApplicationController
     render json: current_tenant, root_url: root_url, root: 'client'
   end
 
+  def create
+    client_params = params[:client]
+    return unless client_params.present?
+
+    render json: ClientCreator.new(client_params).create, root_url: root_url, root: 'client'
+  end
+
   def theme
     return unless current_tenant
 

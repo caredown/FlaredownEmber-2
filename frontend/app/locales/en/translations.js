@@ -114,4 +114,8 @@ export default {
       loadMore: 'Load more...',
     },
   },
+
+  clientAccess: {
+    signupMessage: 'Your request is being processed',
+  }
 };

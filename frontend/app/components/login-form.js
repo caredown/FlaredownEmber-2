@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   classNames: ['login-form'],
+  signupPath: 'signup',
 
   actions: {
     authenticateWithDevise() {

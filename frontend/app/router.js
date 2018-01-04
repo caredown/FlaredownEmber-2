@@ -8,6 +8,11 @@ const Router = Ember.Router.extend(RouterScroll, {
 });
 
 Router.map(function() {
+  this.route('client', function() {
+    this.route('login');
+    this.route('signup');
+  });
+
   this.route('login');
   this.route('signup');
   this.route('chart');
