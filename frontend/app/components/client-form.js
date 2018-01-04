@@ -5,6 +5,7 @@ const {
   get,
   set,
   $,
+  computed: { alias },
   inject: {
     service,
   },
@@ -18,8 +19,7 @@ export default Component.extend({
   classNames: ['client-form'],
 
   i18n: service(),
-
-  processedMsessage: null,
+  slugName: alias('model.slugName'),
 
   generateSlugName(appName) {
     if(isBlank(appName)) {
@@ -29,41 +29,18 @@ export default Component.extend({
     }
   },
 
-  createClient(userId) {
-    this.get('store').createRecord('client', {
-      name: get(this, 'name'),
-      appName: get(this, 'appName'),
-      slugName: get(this, 'slugName'),
-      themeColor: get(this, 'themeColor'),
-      backgroundColor: get(this, 'backgroundColor'),
-      userId: userId
-    }).save();
-  },
-
   actions: {
-    fillSlugName() {
-      let slugName = get(this, 'model.slugName');
+    onAppNameChanged() {
+      const appName = $('.clientAppName').val();
 
-      if(!slugName) {
-        const appName = $('.clientAppName').val();
-
-        slugName = this.generateSlugName(appName);
-      }
-
-      set(this, 'slugName', slugName);
+      set(this, 'slugName', this.generateSlugName(appName));
     },
 
     save() {
-      let model = get(this, 'model');
-      const { email, password } = getProperties(model, 'email', 'password');
-      const slugName = get(this, 'slugName');
+      const model = get(this, 'model');
+      set(model, 'slugName', get(this, 'slugName'));
 
-      set(model, 'passwordConfirmation', password);
-
-      model
-        .save()
-        .then((user) => this.createClient(get(user, 'id')))
-        .then(() => set(this, 'processedMessage', t("clientAccess.signupMessage")));
+      model.save();
     },
   }
 });

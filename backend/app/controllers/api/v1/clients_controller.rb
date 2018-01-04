@@ -6,10 +6,15 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def create
-    client_params = params[:client]
     return unless client_params.present?
 
     render json: ClientCreator.new(client_params).create, root_url: root_url, root: 'client'
+  end
+
+  def update
+    client = Client.find_by(id: params[:id])
+
+    render json: client.update_attributes(client_params.except(:user_id)), root_url: root_url if client
   end
 
   def show_tenant
@@ -38,5 +43,11 @@ class Api::V1::ClientsController < ApplicationController
 
   def root_url
     request.protocol + request.host_with_port
+  end
+
+  private
+
+  def client_params
+    params.require(:client).permit!
   end
 end
