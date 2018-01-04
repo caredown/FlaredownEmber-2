@@ -26,9 +26,13 @@
 #
 
 class UserSerializer < ApplicationSerializer
-  attributes :id, :email, :intercom_hash, :topic_following_id
+  attributes :id, :email, :intercom_hash, :topic_following_id, :is_approved, :is_client, :client_id
 
   has_one :profile, embed_in_root: true
+
+  def is_approved
+    object.approved?
+  end
 
   def topic_following_id
     [] # TO DO object.topic_following.id

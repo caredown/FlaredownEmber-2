@@ -65,6 +65,17 @@ class User < ActiveRecord::Base
   # Delegates
   #
   delegate :locale, :notify, :notify_token, :screen_name, to: :profile
+  delegate :approved, to: :client
+
+  def is_client
+    client.user_id.present?
+  end
+
+  def approved?
+    return nil unless is_client
+
+    approved
+  end
 
   def checkins
     Checkin.where(encrypted_user_id: encrypted_id)

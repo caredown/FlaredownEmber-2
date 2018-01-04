@@ -2,9 +2,7 @@ class Api::V1::ClientsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
-    return unless params[:subdomain].present?
-
-    render json: current_tenant, root_url: root_url, root: 'client'
+    render json: Client.find_by(id: params[:id]), root_url: root_url
   end
 
   def create
@@ -12,6 +10,12 @@ class Api::V1::ClientsController < ApplicationController
     return unless client_params.present?
 
     render json: ClientCreator.new(client_params).create, root_url: root_url, root: 'client'
+  end
+
+  def show_tenant
+    return unless params[:subdomain].present?
+
+    render json: current_tenant, root_url: root_url, root: 'client'
   end
 
   def theme

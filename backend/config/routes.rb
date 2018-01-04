@@ -202,8 +202,8 @@ Rails.application.routes.draw do
       resources :patterns
       resources :charts_pattern, only: [:index]
 
-      resource :clients, only: [:show, :create]
-      put 'clients/:id', to: 'clients#update'
+      resources :clients, except: [:index]
+      get '/clients', to: 'clients#show_tenant'
       get '/clients/theme', to: 'clients#theme'
       get '/clients/manifest', to: 'clients#manifest'
     end
