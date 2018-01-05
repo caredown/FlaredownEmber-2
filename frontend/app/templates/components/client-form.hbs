@@ -19,6 +19,14 @@
     {{input type="text" value=model.backgroundColor placeholder="Enter Background Color"}}
   {{/form-field}}
 
+  {{#form-field for="termOfService" label="Term of Service"}}
+    {{textarea rows="6" value=model.termOfService placeholder="Enter Term of service with HTML markup"}}
+  {{/form-field}}
+
+  {{#form-field for="privacyPolicy" label="Privacy Policy"}}
+    {{textarea rows="6" value=model.privacyPolicy placeholder="Enter Privacy policy with HTML markup"}}
+  {{/form-field}}
+
   <div class="clientLogout">
     <a {{action 'invalidateSession' model}}>Logout</a>
   </div>

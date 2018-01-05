@@ -68,11 +68,12 @@ class User < ActiveRecord::Base
   delegate :approved, to: :client
 
   def is_client
-    client.user_id.present?
+    user_id = client.user_id
+    user_id.present? && id == user_id
   end
 
   def approved?
-    return nil unless is_client
+    return false unless is_client
 
     approved
   end
