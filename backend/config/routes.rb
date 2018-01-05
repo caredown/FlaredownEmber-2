@@ -206,6 +206,7 @@ Rails.application.routes.draw do
       get '/clients', to: 'clients#show_tenant'
       get '/clients/theme', to: 'clients#theme'
       get '/clients/manifest', to: 'clients#manifest'
+      get '/clients/approve/:encrypted_id', to: 'clients#approve'
     end
   end
 end

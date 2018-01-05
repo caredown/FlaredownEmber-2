@@ -23,6 +23,8 @@ class ClientCreator
         user_id: user.id)
 
       user.update_columns(client_id: @client.id)
+
+      ClientApprovementMailer.notify_owner(user.email, @client.id).deliver_later
     end
 
     @client

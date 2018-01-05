@@ -23,6 +23,11 @@ class Api::V1::ClientsController < ApplicationController
     render json: current_tenant, root_url: root_url, root: 'client'
   end
 
+  def approve
+    client = Client.find_by(id: SymmetricEncryption.decrypt(params[:encrypted_id]))
+    client && client.update_attributes(approved: true)
+  end
+
   def theme
     return unless current_tenant
 
