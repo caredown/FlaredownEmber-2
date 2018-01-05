@@ -19,6 +19,10 @@
     {{input type="text" value=model.backgroundColor placeholder="Enter Background Color"}}
   {{/form-field}}
 
+  <div class="clientLogout">
+    <a {{action 'invalidateSession' model}}>Logout</a>
+  </div>
+
   {{input type="submit" class="btn btn-default left" value="Update"}}
 
   {{#if errorMessage}}

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
+import config from 'flaredown/config/environment';
 
 const {
   get,
@@ -13,18 +14,31 @@ const {
 export default Route.extend(ApplicationRouteMixin, {
   notifications: service(),
   session: service(),
+  clientDispatcher: service(),
 
   sessionAuthenticated() {
+    this._super(...arguments);
+
     get(this, 'session.currentUser').then(currentUser => {
       const { isApproved, isClient } = getProperties(currentUser, 'isApproved', 'isClient');
 
       if(isApproved && isClient) {
         this.transitionTo('client.show', get(currentUser, 'client.id'));
-      } else {
-
-        this._super(...arguments);
       }
     });
+  },
+
+  sessionInvalidated() {
+    if (!Ember.testing) {
+      if (this.get('_isFastBoot')) {
+        this.transitionTo(config.rootURL);
+      } else {
+        const isEmptySubdomain = get(this, 'clientDispatcher.isEmptySubdomain');
+        let loginURL = isEmptySubdomain ? config.clientRootURL : config.rootURL
+
+        window.location.replace(loginURL);
+      }
+    }
   },
 
   actions: {

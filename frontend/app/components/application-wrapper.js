@@ -10,14 +10,14 @@ const {
 
 export default Component.extend({
   clientDispatcher: service(),
-  hasNoSubdomain: alias('clientDispatcher.isEmptySubdomain'),
-
   store: service(),
+
+  isEmptySubdomain: alias('clientDispatcher.isEmptySubdomain'),
 
   init() {
     this._super(...arguments);
 
-    if(get(this, 'hasNoSubdomain')){
+    if(get(this, 'isEmptySubdomain')){
       return;
     } else {
       get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this));

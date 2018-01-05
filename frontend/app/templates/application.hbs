@@ -1,13 +1,19 @@
-{{#application-wrapper}}
-  {{partial "application/header"}}
+{{#application-wrapper as |config|}}
+  {{#if config.isEmptySubdomain}}
+    <header class="emptyHeader"></header>
+  {{else}}
+    {{partial "application/header"}}
+  {{/if}}
 
   {{outlet}}
 
-  {{#if hasNoSubdomain}}
+  {{#if config.isEmptySubdomain}}
+    <footer></footer>
+  {{else}}
     {{partial "application/footer"}}
   {{/if}}
 
-  {{#if session.isAuthenticated}}
+  {{#if (and session.isAuthenticated (not config.isEmptySubdomain))}}
     {{bottom-nav}}
   {{/if}}
 

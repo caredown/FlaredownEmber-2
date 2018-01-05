@@ -19,6 +19,7 @@ export default Component.extend({
   classNames: ['client-form'],
 
   i18n: service(),
+  session: service(),
   slugName: alias('model.slugName'),
 
   generateSlugName(appName) {
@@ -34,6 +35,10 @@ export default Component.extend({
       const appName = $('.clientAppName').val();
 
       set(this, 'slugName', this.generateSlugName(appName));
+    },
+
+    invalidateSession() {
+      this.get('session').invalidate();
     },
 
     save() {

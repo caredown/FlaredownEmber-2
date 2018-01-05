@@ -4,6 +4,7 @@ import CheckinByDate from 'flaredown/mixins/checkin-by-date';
 
 const {
   get,
+  getProperties,
   Route,
 } = Ember;
 
@@ -25,25 +26,35 @@ export default Route.extend(CheckinByDate, AuthenticatedRouteMixin, {
 
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'session.currentUser').then(currentUser => {
-        get(currentUser, 'profile').then(profile => {
-          if (get(profile, 'isOnboarded')) {
-            const date = moment(new Date()).format('YYYY-MM-DD');
+        const { isApproved, isClient } = getProperties(currentUser, 'isApproved', 'isClient');
 
-            this.checkinByDate(date).then(
-              () => {
-                this.routeToCheckin(date);
-              },
-              () => {
-                this.routeToNewCheckin(date);
-              }
-            );
-          } else {
-            this.transitionTo('onboarding', get(profile, 'onboardingStep.stepName'));
-          }
-        });
+        if(isApproved && isClient) {
+          this.transitionTo('client.show', get(currentUser, 'client.id'));
+        } else {
+          this.transitionToStartPage(currentUser);
+        }
       });
     } else {
       return this._super(...arguments);
     }
+  },
+
+  transitionToStartPage(currentUser) {
+    get(currentUser, 'profile').then(profile => {
+      if (get(profile, 'isOnboarded')) {
+        const date = moment(new Date()).format('YYYY-MM-DD');
+
+        this.checkinByDate(date).then(
+          () => {
+            this.routeToCheckin(date);
+          },
+          () => {
+            this.routeToNewCheckin(date);
+          }
+        );
+      } else {
+        this.transitionTo('onboarding', get(profile, 'onboardingStep.stepName'));
+      }
+    });
   },
 });

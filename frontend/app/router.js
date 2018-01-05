@@ -11,7 +11,7 @@ Router.map(function() {
   this.route('client', function() {
     this.route('login');
     this.route('signup');
-    this.route('show', { path: '/show/:client_id' });
+    this.route('show', { path: '/:client_id' });
   });
 
   this.route('login');
