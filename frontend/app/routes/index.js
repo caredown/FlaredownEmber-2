@@ -28,8 +28,12 @@ export default Route.extend(CheckinByDate, AuthenticatedRouteMixin, {
       get(this, 'session.currentUser').then(currentUser => {
         const { isApproved, isClient } = getProperties(currentUser, 'isApproved', 'isClient');
 
-        if(isApproved && isClient) {
-          this.transitionTo('client.show', get(currentUser, 'client.id'));
+        if(isClient) {
+          if(isApproved) {
+            this.transitionTo('client.show', get(currentUser, 'client.id'));
+          } else {
+            this.transitionTo('client.new');
+          }
         } else {
           this.transitionToStartPage(currentUser);
         }

@@ -69,6 +69,13 @@ class User < ActiveRecord::Base
   delegate :locale, :notify, :notify_token, :screen_name, to: :profile
   delegate :approved, to: :client
 
+  def is_approved
+    return false unless is_client
+    return false unless client
+
+    approved
+  end
+
   def approved?
     return false unless is_client
     return false unless client

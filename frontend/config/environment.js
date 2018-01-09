@@ -9,6 +9,7 @@ module.exports = function(environment) {
     locationType: 'router-scroll',
     historySupportMiddleware: true,
     encryptionSecret: 'flaredown-symptom-tracker',
+    caredownLink: 'http://caredown.com/',
 
     EmberENV: {
       FEATURES: {

@@ -1,37 +1,31 @@
-{{#form-for for=model onSubmit="save"}}
-  {{#form-field for="name" label="Name"}}
-    {{input type="text" value=model.name placeholder="Enter Client Name"}}
-  {{/form-field}}
+<h2 class="centered">{{headerText}}</h2>
 
-  {{#form-field for="appName" label="Application Name"}}
+{{#form-for for=model onSubmit="save"}}
+  {{#form-field for="appName" label="App name (maximum 30 characters)"}}
     {{input class='clientAppName' type="text" value=model.appName placeholder="Enter Client Application Name" focus-out=(action 'onAppNameChanged')}}
   {{/form-field}}
 
-  {{#form-field for="slugName" label="Subdomain"}}
-    {{input type="text" value=slugName placeholder="Enter Subdomain"}}
+  {{#form-field for="name" label="Company name (used in the Terms of Service)"}}
+    {{input type="text" value=model.name placeholder="Enter Client Name"}}
   {{/form-field}}
 
-  {{#form-field for="themeColor" label="Theme Color"}}
+  {{#form-field for="themeColor" label="Color" class="fs-private"}}
+    {{#each COLORS as |color|}}
+      {{#radio-button name="color" value=color.code changed="colorChanged"}}
+        {{color.name}}
+      {{/radio-button}}
+    {{/each}}
+  {{/form-field}}
+
+{{!--   {{#form-field for="themeColor" label="Theme Color"}}
     {{input type="text" value=model.themeColor placeholder="Enter Theme Color"}}
-  {{/form-field}}
-
-  {{#form-field for="backgroundColor" label="Background Color"}}
-    {{input type="text" value=model.backgroundColor placeholder="Enter Background Color"}}
-  {{/form-field}}
-
-  {{#form-field for="termOfService" label="Term of Service"}}
-    {{textarea rows="6" value=model.termOfService placeholder="Enter Term of service with HTML markup"}}
-  {{/form-field}}
-
-  {{#form-field for="privacyPolicy" label="Privacy Policy"}}
-    {{textarea rows="6" value=model.privacyPolicy placeholder="Enter Privacy policy with HTML markup"}}
-  {{/form-field}}
+  {{/form-field}} --}}
 
   <div class="clientLogout">
     <a {{action 'invalidateSession' model}}>Logout</a>
   </div>
 
-  {{input type="submit" class="btn btn-default left" value="Update"}}
+  {{input type="submit" class="btn btn-default left" value="Save"}}
 
   {{#if errorMessage}}
     <div class="alert alert-danger">
@@ -39,3 +33,4 @@
     </div>
   {{/if}}
 {{/form-for}}
+

@@ -5,6 +5,7 @@ const {
   get,
   set,
   $,
+  computed,
   computed: { alias },
   inject: {
     service,
@@ -15,12 +16,26 @@ const {
   Component,
 } = Ember;
 
+const COLORS =
+ [{ name: 'Emerald', code: '#50C878' },
+  { name: 'Amethyst', code: '#9966cc' },
+  { name: 'Azure', code: '#007fff' },
+  { name: 'Custom', code: '' }
+ ]
+
 export default Component.extend({
   classNames: ['client-form'],
 
   i18n: service(),
   session: service(),
   slugName: alias('model.slugName'),
+  COLORS,
+  waitForApprove: false,
+
+  newHeaderText: t("clientAccess.new.headerText"),
+  headerText: computed('model.isApproved', function() {
+    return get(this, 'model.isApproved') ? 'Dashboard' : get(this, 'newHeaderText');
+  }),
 
   generateSlugName(appName) {
     if(isBlank(appName)) {
@@ -41,11 +56,20 @@ export default Component.extend({
       this.get('session').invalidate();
     },
 
+    colorChanged(color) {
+
+      set(this, 'model.themeColor', get(color, 'code'));
+    },
+
     save() {
       const model = get(this, 'model');
-      set(model, 'slugName', get(this, 'slugName'));
+      const appName = $('.clientAppName').val();
 
-      model.save();
+      set(model, 'slugName', this.generateSlugName(appName));
+
+      model.save().then((client) => {
+        return get(this, 'router').transitionTo('client.show', get(client, 'id'));
+      });
     },
   }
 });

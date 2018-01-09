@@ -11,5 +11,6 @@ export default Model.extend({
   logo: attr('string'),
   termOfService: attr('raw'),
   privacyPolicy: attr('raw'),
-  userId: attr('string')
+  userId: attr('string'),
+  approved: attr('boolean'),
 });

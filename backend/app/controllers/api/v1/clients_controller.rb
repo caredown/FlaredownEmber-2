@@ -8,7 +8,7 @@ class Api::V1::ClientsController < ApplicationController
   def create
     return unless client_params.present?
 
-    render json: ClientCreator.new(client_params).create, root_url: root_url, root: 'client'
+    render json: ClientCreator.new(client_params, current_user.id).create, root_url: root_url, root: 'client'
   end
 
   def update

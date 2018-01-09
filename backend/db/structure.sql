@@ -813,7 +813,7 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     client_id integer,
-    is_client boolean DEFAULT false
+    role character varying
 );
 
 

@@ -1,7 +1,7 @@
 class ClientCreator
   attr_accessor :email, :name, :app_name, :slug_name, :theme_color, :background_color, :password, :user
 
-  def initialize(options)
+  def initialize(options, author_id)
     @email = options[:email]
     @name = options[:name]
     @app_name = options[:app_name]
@@ -10,7 +10,7 @@ class ClientCreator
     @background_color = options[:background_color]
     @password = options[:password]
 
-    @user = User.find_by(id: options[:user_id])
+    @user = User.find_by(id: author_id)
   end
 
   def create

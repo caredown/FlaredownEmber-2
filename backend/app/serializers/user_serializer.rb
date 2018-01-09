@@ -31,7 +31,7 @@ class UserSerializer < ApplicationSerializer
   has_one :profile, embed_in_root: true
 
   def is_approved
-    object.approved?
+    object.is_approved
   end
 
   def topic_following_id
