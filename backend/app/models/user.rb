@@ -23,7 +23,9 @@
 #  invited_by_type        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#
+#  client_id              :integer
+#  is_client              :boolean          default: false
+
 
 class User < ActiveRecord::Base
   include Authenticatable
@@ -67,13 +69,9 @@ class User < ActiveRecord::Base
   delegate :locale, :notify, :notify_token, :screen_name, to: :profile
   delegate :approved, to: :client
 
-  def is_client
-    user_id = client.user_id
-    user_id.present? && id == user_id
-  end
-
   def approved?
     return false unless is_client
+    return false unless client
 
     approved
   end

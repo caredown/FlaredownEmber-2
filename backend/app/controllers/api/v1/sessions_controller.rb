@@ -8,8 +8,6 @@ class Api::V1::SessionsController < ApplicationController
     fail 'invalid email or password' if user.nil?
     # rubocop:enable Style/SignalException
 
-    raise 'Your request is being processed' if user.is_client && !user.approved?
-
     render json: user, root: false, serializer: SessionSerializer
   rescue => e
     render json: { errors: Array(e.message) }, status: 401

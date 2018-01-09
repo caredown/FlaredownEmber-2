@@ -812,7 +812,8 @@ CREATE TABLE users (
     invited_by_type character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    client_id integer
+    client_id integer,
+    is_client boolean DEFAULT false
 );
 
 
@@ -1702,4 +1703,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171128081115');
 INSERT INTO schema_migrations (version) VALUES ('20171212110911');
 
 INSERT INTO schema_migrations (version) VALUES ('20180104103858');
+
+INSERT INTO schema_migrations (version) VALUES ('20180109094719');
 

@@ -117,5 +117,9 @@ export default {
 
   clientAccess: {
     signupMessage: 'Your request is being processed',
+    signup: {
+      header: 'Create your Caredown account',
+      info: 'Please note: custom apps are <b>only avaliable in English</b> at this time',
+    }
   }
 };
