@@ -2,7 +2,7 @@
 
 {{#form-for for=model onSubmit="save"}}
   {{#form-field for="appName" label="App name (maximum 30 characters)"}}
-    {{input class='clientAppName' type="text" value=model.appName placeholder="Enter Client Application Name" focus-out=(action 'onAppNameChanged')}}
+    {{input type="text" value=model.appName placeholder="Enter Client Application Name"}}
   {{/form-field}}
 
   {{#form-field for="name" label="Company name (used in the Terms of Service)"}}
@@ -11,15 +11,16 @@
 
   {{#form-field for="themeColor" label="Color" class="fs-private"}}
     {{#each COLORS as |color|}}
-      {{#radio-button name="color" value=color.code changed="colorChanged"}}
+      {{#radio-button name="color" value=color.code groupValue=model.themeColor changed="colorChanged"}}
         {{color.name}}
       {{/radio-button}}
     {{/each}}
-  {{/form-field}}
+    {{#radio-button name='color' value='' groupValue=model.themeColor changed="onCustom"}}Custom{{/radio-button}}
 
-{{!--   {{#form-field for="themeColor" label="Theme Color"}}
-    {{input type="text" value=model.themeColor placeholder="Enter Theme Color"}}
-  {{/form-field}} --}}
+    {{#if isCustom}}
+      {{input type="text" class="themeColor" value=model.themeColor placeholder="Enter Theme Color in HEX format"}}
+    {{/if}}
+  {{/form-field}}
 
   <div class="clientLogout">
     <a {{action 'invalidateSession' model}}>Logout</a>
