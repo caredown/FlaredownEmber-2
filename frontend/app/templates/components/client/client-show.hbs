@@ -3,3 +3,9 @@
   {{link-to 'Users' '#'}}
   {{link-to 'App' '#'}}
 </div>
+
+{{#if (gt users.length 2)}}
+
+{{else}}
+  {{client/invite-users model=model}}
+{{/if}}

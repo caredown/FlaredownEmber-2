@@ -1,3 +1,12 @@
+.client-dashboard {
+  @include outer-container;
+  @include single-col;
+
+  .inviteBox {
+    margin-top: 1.2em;
+  }
+}
+
 .waitApproval {
   font-size: 1.2em;
 
@@ -7,8 +16,3 @@
 .clientBgText {
   font-size: 1.4em;
 }
-
-.showBlock {
-  display: block !important;
-}
-

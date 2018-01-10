@@ -12,7 +12,7 @@ const {
 } = Ember;
 
 export default Component.extend({
-  classNames: ['client-form'],
+  classNames: ['client-dashboard'],
 
   i18n: service(),
   session: service(),

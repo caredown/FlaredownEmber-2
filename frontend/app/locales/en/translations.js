@@ -128,7 +128,12 @@ export default {
       wait: {
         grats: 'Nice work! <br> We\'re setting up your app now, you\'ll receive an email when it\'s ready.',
         btnValue: 'Back to Caredown',
-      }
+      },
+      invite: {
+        header: 'Let\'s get your users on board!',
+        btnValue: 'Send Email Invites',
+        linkText: 'Or, ask them to visit this link:',
+      },
     },
   }
 };
