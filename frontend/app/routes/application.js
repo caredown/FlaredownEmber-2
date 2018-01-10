@@ -18,15 +18,10 @@ export default Route.extend(ApplicationRouteMixin, {
 
   sessionAuthenticated() {
     this._super(...arguments);
-
     get(this, 'session.currentUser').then(currentUser => {
-      const { isApproved, isClient } = getProperties(currentUser, 'isApproved', 'isClient');
+      const { isApproved, isClient, clientPersisted } = getProperties(currentUser, 'isApproved', 'isClient', 'clientPersisted');
       if(isClient) {
-        if(isApproved) {
-          this.transitionTo('client.show', get(currentUser, 'client.id'));
-        } else {
-          this.transitionTo('client.new');
-        }
+        clientPersisted ? this.transitionTo('client.show', get(currentUser, 'client.id')) : this.transitionTo('client.new');
       }
     });
   },

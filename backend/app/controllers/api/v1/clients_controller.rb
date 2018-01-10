@@ -1,8 +1,9 @@
 class Api::V1::ClientsController < ApplicationController
   skip_before_action :authenticate_user!
+  load_and_authorize_resource
 
   def show
-    render json: Client.find_by(id: params[:id]), root_url: root_url
+    render json: @client, root_url: root_url
   end
 
   def create

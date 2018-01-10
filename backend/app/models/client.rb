@@ -6,4 +6,6 @@ class Client < ActiveRecord::Base
     message: 'Subdomain should be lowercase with dashes instead of space' }
 
   has_many :users
+
+  alias_attribute :author_id, :user_id
 end

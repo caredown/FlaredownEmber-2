@@ -1,9 +1,17 @@
 .waitApproval {
   font-size: 1.2em;
+
+  svg { margin-bottom: 1em; }
 }
 
 .clientBgText {
   font-size: 1.4em;
 }
 
-svg {margin-bottom: 1em;}
+.showBlock {
+  display: block !important;
+}
+
+.themeColor {
+  display: none;
+}

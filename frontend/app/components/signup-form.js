@@ -48,7 +48,7 @@ export default Component.extend({
       set(model, 'passwordConfirmation', password);
 
       if(clientAccess) {
-        set(model, 'isClient', true);
+        set(model, 'role', 'client');
       }
 
       model

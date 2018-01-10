@@ -69,18 +69,25 @@ class User < ActiveRecord::Base
   delegate :locale, :notify, :notify_token, :screen_name, to: :profile
   delegate :approved, to: :client
 
+  ROLES = %i[admin client]
+
   def is_approved
-    return false unless is_client
+    return false unless is_client?
     return false unless client
 
     approved
   end
 
-  def approved?
-    return false unless is_client
-    return false unless client
+  def is_author
+    id == client.author_id
+  end
 
-    approved
+  def is_client?
+    role == 'client'
+  end
+
+  def is_admin?
+    role == 'admin'
   end
 
   def checkins

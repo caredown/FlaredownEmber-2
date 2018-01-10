@@ -23,17 +23,12 @@ export default Route.extend(CheckinByDate, AuthenticatedRouteMixin, {
     if (typeof FastBoot !== 'undefined') { return; }
 
     transition.abort();
-
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'session.currentUser').then(currentUser => {
-        const { isApproved, isClient } = getProperties(currentUser, 'isApproved', 'isClient');
+        const { isApproved, isClient, clientPersisted } = getProperties(currentUser, 'isApproved', 'isClient', 'clientPersisted');
 
         if(isClient) {
-          if(isApproved) {
-            this.transitionTo('client.show', get(currentUser, 'client.id'));
-          } else {
-            this.transitionTo('client.new');
-          }
+          clientPersisted ? this.transitionTo('client.show', get(currentUser, 'client.id')) : this.transitionTo('client.new');
         } else {
           this.transitionToStartPage(currentUser);
         }
