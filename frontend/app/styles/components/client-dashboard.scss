@@ -8,6 +8,17 @@
     align-items: baseline;
   }
 
+  .userListData {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .userItem {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .inviteBox {
     margin-top: 1.2em;
   }
@@ -18,6 +29,7 @@
       font-weight: normal;
       font-size: 1.2em;
       background-color: transparent;
+      padding-left: 0;
 
       &.active {
         font-weight: 600;

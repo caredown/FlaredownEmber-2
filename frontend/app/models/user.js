@@ -10,6 +10,7 @@ export default DS.Model.extend({
   clientPersisted: DS.attr('boolean'),
 
   //Associations
+  client: DS.belongsTo('client'),
   profile: DS.belongsTo('profile'),
   topicFollowing: DS.belongsTo('topic-following'),
   client: DS.belongsTo('client'),

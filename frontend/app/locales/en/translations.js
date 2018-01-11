@@ -134,6 +134,10 @@ export default {
         btnValue: 'Send Email Invites',
         linkText: 'Or, ask them to visit this link:',
       },
+
+      userIndex: {
+        btnValue: '+ Invite users',
+      }
     },
   }
 };

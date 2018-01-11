@@ -90,6 +90,8 @@ class Ability
     can [:show, :update], Client do |client|
       user.is_client? && user.id == client.author_id
     end
+
+    can [:index, :destroy], User if user.is_client?
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 

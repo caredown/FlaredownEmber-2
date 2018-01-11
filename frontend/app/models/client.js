@@ -11,8 +11,8 @@ export default Model.extend({
   logo: attr('string'),
   termOfService: attr('raw'),
   privacyPolicy: attr('raw'),
-  userId: attr('string'),
+  authorId: attr('string'),
   approved: attr('boolean'),
 
-  users: hasMany('user', { async: false }),
+  users: hasMany('user', { async: true }),
 });

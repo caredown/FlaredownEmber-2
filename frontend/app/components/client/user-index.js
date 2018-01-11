@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import Inflector from 'ember-inflector';
+import { singularize, pluralize } from 'ember-inflector';
 
 const {
   get,
@@ -10,7 +12,7 @@ const {
 
 export default Component.extend({
   i18n: service(),
-  users: alias('model.users'),
+  userCount: alias('model.users.length'),
 
   actions: {
     onInvite() {

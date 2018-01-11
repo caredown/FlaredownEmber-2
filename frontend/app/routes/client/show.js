@@ -9,6 +9,6 @@ const {
 
 export default Route.extend(AuthenticatedRouteMixin, {
   model(params) {
-    return get(this, 'store').find('client', params.client_id);
+    return get(this, 'store').findRecord('client', params.client_id, { inlcude: 'users' });
   },
 });
