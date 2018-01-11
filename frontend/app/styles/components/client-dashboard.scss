@@ -5,6 +5,24 @@
   .inviteBox {
     margin-top: 1.2em;
   }
+
+  .btn-client {
+    button {
+      color: black;
+      font-weight: normal;
+      font-size: 1.2em;
+      background-color: transparent;
+
+      &.active {
+        font-weight: 600;
+      }
+
+      &:hover,
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
 }
 
 .waitApproval {

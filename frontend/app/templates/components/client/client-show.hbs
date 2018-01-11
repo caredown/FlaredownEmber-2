@@ -1,11 +1,12 @@
 <p class="clientBgText">{{model.name}}</p>
-<div class="nav-links">
-  {{link-to 'Users' '#'}}
-  {{link-to 'App' '#'}}
+
+<div class="btn-client vert-offset-top-1 vert-offset-bottom-3">
+  <button {{action "showUsers"}} class={{if usersVisible "active" ""}}>Users</button>
+  <button {{action "showApp"}} class={{if appVisible "active" "" }}>App</button>
 </div>
 
-{{#if (gt users.length 2)}}
-
+{{#if usersVisible}}
+  {{client/user-index model=model clientUrl=clientUrl}}
 {{else}}
-  {{client/invite-users model=model}}
+  {{client/client-app model=model clientUrl=clientUrl}}
 {{/if}}
