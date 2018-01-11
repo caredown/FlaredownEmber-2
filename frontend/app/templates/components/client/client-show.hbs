@@ -1,6 +1,10 @@
-<p class="clientBgText">{{model.name}}</p>
+<div class="clientShowHeader">
+  <p class="clientBgText">{{model.name}}</p>
 
-<div class="btn-client vert-offset-top-1 vert-offset-bottom-3">
+  {{logout-link model=model}}
+</div>
+
+<div class="btn-client vert-offset-top-1 vert-offset-bottom-2">
   <button {{action "showUsers"}} class={{if usersVisible "active" ""}}>Users</button>
   <button {{action "showApp"}} class={{if appVisible "active" "" }}>App</button>
 </div>

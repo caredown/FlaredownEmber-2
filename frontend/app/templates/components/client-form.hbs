@@ -1,5 +1,3 @@
-<h2 class="centered">{{headerText}}</h2>
-
 {{#form-for for=model onSubmit="save"}}
   {{#form-field for="appName" label="App name (maximum 30 characters)"}}
     {{input type="text" value=model.appName placeholder="Enter Client Application Name"}}
@@ -10,21 +8,8 @@
   {{/form-field}}
 
   {{#form-field for="themeColor" label="Color" class="fs-private"}}
-    {{#each COLORS as |color|}}
-      {{#radio-button name="color" value=color.code groupValue=model.themeColor changed="colorChanged"}}
-        {{color.name}}
-      {{/radio-button}}
-    {{/each}}
-    {{#radio-button name='color' value='' groupValue=model.themeColor changed="onCustom"}}Custom{{/radio-button}}
-
-    {{#if isCustom}}
-      {{input type="text" class="themeColor" value=model.themeColor placeholder="Enter Theme Color in HEX format"}}
-    {{/if}}
+    {{client/color-selection model=model}}
   {{/form-field}}
-
-  <div class="clientLogout">
-    <a {{action 'invalidateSession' model}}>Logout</a>
-  </div>
 
   {{input type="submit" class="btn btn-default left" value="Save"}}
 

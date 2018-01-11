@@ -1,17 +1,21 @@
-.client-form {
+.client-white-box {
   @include outer-container;
   @include single-col;
+
+  .clientLogout {
+    margin-top: 1em;
+  }
+}
+
+.client-form {
+  margin-bottom: 3em;
 
   .signupMsg {
     text-align: center;
   }
 
   input[type=submit] {
-    margin-top: 2em;
-  }
-
-  .clientLogout {
-    margin-top: 2em;
+    margin-top: 1em;
   }
 }
 

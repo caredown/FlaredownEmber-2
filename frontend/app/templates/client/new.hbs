@@ -1,1 +1,8 @@
-{{client-form model=model}}
+<div class="client-white-box">
+  <h2 class="centered">{{t "clientAccess.new.headerText"}}</h2>
+
+  {{client-form model=model}}
+
+  <br>
+  {{logout-link model=model}}
+</div>

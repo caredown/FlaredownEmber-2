@@ -12,8 +12,6 @@ const {
     service,
   },
   isBlank,
-  setProperties,
-  getProperties,
   Component,
 } = Ember;
 
@@ -53,16 +51,6 @@ export default Component.extend({
   actions: {
     invalidateSession() {
       this.get('session').invalidate();
-    },
-
-    colorChanged(colorCode) {
-      set(this, 'isCustom', false);
-      set(this, 'model.themeColor', colorCode);
-    },
-
-    onCustom() {
-      set(this, 'model.themeColor', '');
-      set(this, 'isCustom', true);
     },
 
     save() {

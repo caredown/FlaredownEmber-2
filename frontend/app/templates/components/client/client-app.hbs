@@ -5,3 +5,11 @@
 <p>App url: <br>
   <span class="clientBgText">{{clientUrl}}</span>
 </p>
+
+{{#form-for for=model onSubmit="save"}}
+  {{#form-field for="themeColor" label="Color" class="fs-private"}}
+    {{client/color-selection model=model}}
+  {{/form-field}}
+
+  {{input type="submit" class="btn btn-default left" value="Save"}}
+{{/form-for}}

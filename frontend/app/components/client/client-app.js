@@ -19,5 +19,8 @@ export default Component.extend({
   }),
 
   actions: {
+    save() {
+      get(this, 'model').save();
+    },
   }
 });

@@ -2,6 +2,12 @@
   @include outer-container;
   @include single-col;
 
+  .clientShowHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
   .inviteBox {
     margin-top: 1.2em;
   }
