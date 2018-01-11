@@ -5,10 +5,17 @@
       {{t "clientAccess.dashboard.userIndex.btnValue"}}
     </button>
   </div>
-  {{#each model.users as |user|}}
+
+  {{#each users as |user|}}
     <hr>
     {{client/user-show user=user}}
   {{/each}}
+
+  <div class="paginationNavs">
+    <a href="#" {{action 'onPrev'}}>‹</a>
+    <a href="#" {{action 'onNext'}}>›</a>
+  </div>
+
 {{else}}
   {{client/invite-users model=model}}
 {{/if}}

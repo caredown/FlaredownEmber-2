@@ -62,6 +62,7 @@ gem 'symmetric-encryption'
 
 gem 'ruby-progressbar', require: false
 
+gem 'kaminari-activerecord'
 gem 'kaminari-mongoid'
 gem 'kaminari-actionview'
 gem 'rack-cors', require: 'rack/cors'

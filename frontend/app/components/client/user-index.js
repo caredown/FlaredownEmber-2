@@ -12,7 +12,14 @@ const {
 
 export default Component.extend({
   i18n: service(),
+  page: 1,
+  loadingUsers: false,
   userCount: alias('model.users.length'),
+
+  users: computed('page', function() {
+    const page = get(this, 'page');
+    return get(this, 'store').query('user', { client_id: get(this, 'model.id'), page: page });
+  }),
 
   actions: {
     onInvite() {
@@ -21,6 +28,14 @@ export default Component.extend({
       const body = `You can signup by this link: ${get(this, 'clientUrl')}`;
 
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    },
+
+    onPrev() {
+      this.decrementProperty('page', 1);
+    },
+
+    onNext() {
+      this.incrementProperty('page', 1);
     },
   }
 });

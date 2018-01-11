@@ -2,7 +2,10 @@ class Api::V1::UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    render json: @users
+    page = params[:page] || 1
+    @users = User.accessible_by(current_ability).all
+
+    render json: @users.page(page).per(5)
   end
 
   def show
@@ -11,5 +14,9 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     render json: @user.destroy
+  end
+
+  def current_ability
+    Ability.new(current_user)
   end
 end
