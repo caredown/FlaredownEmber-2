@@ -11,5 +11,9 @@
     {{client/color-selection model=model}}
   {{/form-field}}
 
+  {{#form-field for="logo" label='Logo'}}
+    {{file-upload model=model url='clients/upload'}}
+  {{/form-field}}
+
   {{input type="submit" class="btn btn-default left" value="Save"}}
 {{/form-for}}

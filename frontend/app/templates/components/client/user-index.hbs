@@ -1,5 +1,5 @@
 {{#if (gt userCount 1)}}
-  <div class="userListData">
+  <div class="flexContainer alignCenter">
     <b>{{pluralize userCount "user"}}</b>
     <button class="history-btn small-btn" {{action "onInvite"}}>
       {{t "clientAccess.dashboard.userIndex.btnValue"}}
@@ -11,7 +11,7 @@
     {{client/user-show user=user}}
   {{/each}}
 
-  <div class="paginationNavs">
+  <div class="paginationNavs flexContainer">
     <a href="#" {{action 'onPrev'}}>‹</a>
     <a href="#" {{action 'onNext'}}>›</a>
   </div>

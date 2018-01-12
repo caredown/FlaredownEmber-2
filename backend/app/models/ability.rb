@@ -85,13 +85,13 @@ class Ability
     can :read, Weather if user.persisted?
     can :read, NilClass if user.persisted?
 
-    can [:index, :destroy], Client if user.is_admin?
+    can [:manage], Client if user.is_admin?
     can :create, Client if user.is_client?
     can [:show, :update], Client do |client|
       user.is_client? && user.id == client.author_id
     end
 
-    can [:manage], User, client_id: user.client.id
+    can [:manage], User, client_id: user.client.try(:id)
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 

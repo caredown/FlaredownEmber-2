@@ -1,0 +1,15 @@
+<div class="client-dashboard">
+  <div class="flexContainer alignBaseline">
+    <h3>Caredown Admin</h3>
+    {{logout-link}}
+  </div>
+
+  <div class="clientIndexHeader flexContainer">
+    <span>APP NAME / URL</span>
+    <span>USERS</span>
+  </div>
+  {{#each model as |client|}}
+    <hr>
+    {{client/client-item client=client}}
+  {{/each}}
+</div>

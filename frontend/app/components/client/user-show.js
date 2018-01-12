@@ -7,7 +7,7 @@ const {
 
 export default Component.extend({
   tagName: 'div',
-  classNames: ['userItem'],
+  classNames: ['flexContainer'],
 
   actions: {
     onDelete(user) {

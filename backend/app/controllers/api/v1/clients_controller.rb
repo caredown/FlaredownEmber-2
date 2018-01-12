@@ -2,6 +2,10 @@ class Api::V1::ClientsController < ApplicationController
   skip_before_action :authenticate_user!
   load_and_authorize_resource
 
+  def index
+    render json: @clients, root_url: root_url
+  end
+
   def show
     render json: @client, root_url: root_url
   end

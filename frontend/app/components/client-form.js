@@ -4,6 +4,7 @@ import { translationMacro as t } from "ember-i18n";
 const {
   get,
   set,
+  setProperties,
   $,
   computed,
   isPresent,
@@ -53,10 +54,21 @@ export default Component.extend({
       this.get('session').invalidate();
     },
 
+    setLogo(file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = (e) => { setProperties(this, { base64Data: e.target.result, filename: file.name, filetype: file.type }) };
+    },
+
     save() {
       const model = get(this, 'model');
+      const base64Data = get(this, 'base64Data');
+      const slugName = get(this, 'slugName');
+      const filename = get(this, 'filename');
+      const filetype = get(this, 'filetype');
 
-      set(model, 'slugName', get(this, 'slugName'));
+      setProperties(model, { slugName: slugName, logo: base64Data, filename: filename, filetype: filetype });
 
       model.save().then((client) => {
         return get(this, 'router').transitionTo('client.show', get(client, 'id'));

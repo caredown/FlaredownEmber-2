@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Inflector from 'ember-inflector';
-import { singularize, pluralize } from 'ember-inflector';
+import { pluralize } from 'ember-inflector';
 
 const {
   get,

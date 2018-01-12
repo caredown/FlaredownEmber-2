@@ -1,4 +1,5 @@
 class Client < ActiveRecord::Base
+  attr_accessor :filename, :filetype
   mount_uploader :logo, LogoUploader
   SLUG_FORMAT = /([[:lower:]]|[0-9]+-?[[:lower:]])(-[[:lower:]0-9]+|[[:lower:]0-9])*/
 

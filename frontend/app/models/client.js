@@ -13,6 +13,8 @@ export default Model.extend({
   privacyPolicy: attr('raw'),
   authorId: attr('string'),
   approved: attr('boolean'),
+  filename: attr('string'),
+  filetype: attr('string'),
 
   users: hasMany('user', { async: true }),
 });

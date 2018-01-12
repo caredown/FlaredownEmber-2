@@ -1,5 +1,6 @@
 class ClientCreator
-  attr_accessor :email, :name, :app_name, :slug_name, :theme_color, :background_color, :password, :user
+  attr_accessor :email, :name, :app_name, :slug_name, :theme_color, :background_color,
+                :password, :user, :base64, :filename, :file_extn_name
 
   def initialize(options, author_id)
     @email = options[:email]
@@ -9,6 +10,9 @@ class ClientCreator
     @theme_color = options[:theme_color]
     @background_color = options[:background_color]
     @password = options[:password]
+    @base64 = options[:logo]
+    @filename = options[:filename]
+    @file_extn_name = File.extname(filename || '')
 
     @user = User.find_by(id: author_id)
   end
@@ -23,9 +27,10 @@ class ClientCreator
         user_id: user.id)
 
       user.update_columns(client_id: @client.id)
-
-      ClientApprovementMailer.notify_owner(user.email, @client.id).deliver_later
     end
+
+    ClientApprovementMailer.notify_owner(user.email, @client.id).deliver_later
+    SaveBase64ToLogoJob.perform_async(@client.id, base64, filename)
 
     @client
   end
