@@ -6,19 +6,17 @@ class SaveBase64ToLogoJob
 
     return unless client || base64.present?
 
-    client.logo = decode_base64(base64, filename, file_extn_name)
+    client.logo = decode_base64_to_file(base64, filename, file_extn_name)
     client.save
   end
 
-  def decode_base64(base, filename, file_extn_name)
-    file = Tempfile.new([file_base_name(filename), file_extn_name])
+  def decode_base64_to_file(base, filename, file_extn_name)
+    file_base_name = File.basename(filename, file_extn_name)
+
+    file = Tempfile.new([file_base_name, file_extn_name])
     file.binmode
     file.write(Base64.decode64(base))
     file.close
     file
-  end
-
-  def file_base_name(filename)
-    File.basename(filename, file_extn_name)
   end
 end

@@ -30,7 +30,7 @@ class ClientCreator
     end
 
     ClientApprovementMailer.notify_owner(user.email, @client.id).deliver_later
-    SaveBase64ToLogoJob.perform_async(@client.id, base64, filename)
+    SaveBase64ToLogoJob.perform_async(@client.id, base64, filename, file_extn_name)
 
     @client
   end
