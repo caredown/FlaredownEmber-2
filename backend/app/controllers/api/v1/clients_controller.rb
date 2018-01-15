@@ -3,7 +3,11 @@ class Api::V1::ClientsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    render json: @clients, root_url: root_url
+    if params[:subdomain].present?
+      render json: current_tenant, root_url: root_url, root: 'client'
+    else
+      render json: @clients, root_url: root_url
+    end
   end
 
   def show
@@ -18,8 +22,13 @@ class Api::V1::ClientsController < ApplicationController
 
   def update
     client = Client.find_by(id: params[:id])
+    filename = client_params[:filename]
 
-    render json: client.update_attributes(client_params.except(:user_id)), root_url: root_url if client
+    client.update_attributes(client_params.permit(:theme_color, :filename))
+    client.logo = client_params[:logo]
+    client.save!
+
+    render json: client, root_url: root_url if client
   end
 
   def show_tenant

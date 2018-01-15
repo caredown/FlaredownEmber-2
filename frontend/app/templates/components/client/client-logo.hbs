@@ -1,18 +1,13 @@
 {{file-upload model=model url='clients/upload' onChanged=(action 'logoSelected')}}
 
 {{#if showPreview}}
-{{!--   <div class="cropperContainer"><img id="logo" class="clientLogo" src={{fileData}}></div>
-  <div class="btn-client vert-offset-top-1 vert-offset-bottom-2">
-    <button {{action "cropLogo"}}>Crop image</button>
-  </div> --}}
+  <div class="cropper-container">
+    <img id="clientLogo" class="clientLogo" src={{fileData}}>
+    <hr>
+  </div>
 
-   <div class="cropper-container">
-     <img id="clientLogo" class="clientLogo" src={{fileData}}>
-     <hr>
-   </div>
+  <div id="logo-preview"></div>
 
-   <div id="logo-preview"></div>
-
-   <button type="button" {{action 'getCroppedAvatar'}} data-method="getCroppedCanvas">Crop</button>
-   <button type="button" {{action 'cancelCropp'}}>Cancel Crop</button>
+  <button type="button" {{action 'getCroppedLogo'}}>Crop</button>
+  <button type="button" {{action 'cancelCrop'}}>Cancel Crop</button>
 {{/if}}

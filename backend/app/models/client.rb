@@ -1,6 +1,7 @@
 class Client < ActiveRecord::Base
   attr_accessor :filename, :filetype
-  mount_uploader :logo, LogoUploader
+
+  mount_base64_uploader :logo, LogoUploader, file_name: -> (u) { u.filename }
   SLUG_FORMAT = /([[:lower:]]|[0-9]+-?[[:lower:]])(-[[:lower:]0-9]+|[[:lower:]0-9])*/
 
   validates :slug_name, presence: true, uniqueness: true, format: { with: Regexp.new('\A' + SLUG_FORMAT.source + '\z'),

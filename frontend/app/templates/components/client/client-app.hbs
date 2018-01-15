@@ -11,8 +11,12 @@
     {{client/color-selection model=model}}
   {{/form-field}}
 
+  {{#if model.logo}}
+     <img id="clientLogo" class="clientLogo" src={{model.logo}}>
+  {{/if}}
+
   {{#form-field for="logo" label='Logo'}}
-    {{file-upload model=model url='clients/upload'}}
+    {{client/client-logo onCrop=(action 'setLogo') showPreview=showPreview}}
   {{/form-field}}
 
   {{input type="submit" class="btn btn-default left" value="Save"}}
