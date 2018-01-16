@@ -18,7 +18,8 @@ export default Service.extend({
 
   showForCaredown: config.showForCaredown,
   DOMAINS: config.DOMAINS,
-  caredownSubdomain: computed('location.host', function() {
+
+  caredownSubdomain: computed(function() {
     if (typeof location !== 'undefined') {
       return location.host.split('.')[0];
     }

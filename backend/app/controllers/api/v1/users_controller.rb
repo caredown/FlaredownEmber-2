@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
     page = params[:page] || 1
     @users = User.accessible_by(current_ability).all
 
-    render json: @users.page(page).per(5)
+    render json: @users.page(page).per(10)
   end
 
   def show

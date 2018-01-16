@@ -15,6 +15,7 @@ export default Model.extend({
   approved: attr('boolean'),
   filename: attr('string'),
   filetype: attr('string'),
+  userCount: attr(),
 
-  users: hasMany('user', { async: true }),
+  users: hasMany('user', { async: false }),
 });

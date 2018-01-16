@@ -25,11 +25,11 @@ export default Route.extend(CheckinByDate, AuthenticatedRouteMixin, {
     transition.abort();
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'session.currentUser').then(currentUser => {
-        const { isApproved, isClient, clientPersisted, role } = getProperties(currentUser, 'isApproved', 'isClient', 'clientPersisted', 'role');
+        const { isApproved, clientPersisted, role } = getProperties(currentUser, 'isApproved', 'clientPersisted', 'role');
 
         if(role === 'admin') {
           this.transitionTo('client');
-        } else if(isClient) {
+        } else if(role === 'client') {
           clientPersisted ? this.transitionTo('client.show', get(currentUser, 'client.id')) : this.transitionTo('client.new');
         } else {
           this.transitionToStartPage(currentUser);

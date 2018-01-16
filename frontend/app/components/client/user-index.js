@@ -14,7 +14,7 @@ export default Component.extend({
   i18n: service(),
   page: 1,
   loadingUsers: false,
-  userCount: alias('model.users.length'),
+  userCount: alias('model.userCount'),
 
   users: computed('page', function() {
     const page = get(this, 'page');

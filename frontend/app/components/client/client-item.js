@@ -17,7 +17,7 @@ export default Component.extend({
   i18n: service(),
   baseDomain: config.baseDomain,
 
-  userCount: alias('client.users.length'),
+  userCount: alias('client.userCount'),
 
   clientUrl: computed('client.slugName', 'baseDomain', function() {
     const subdomain = get(this, 'client.slugName');

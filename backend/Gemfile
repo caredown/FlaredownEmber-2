@@ -69,6 +69,7 @@ gem 'rack-cors', require: 'rack/cors'
 
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64'
+gem 'mini_magick'
 gem 'acts_as_tenant'
 
 group :development, :test do
