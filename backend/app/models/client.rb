@@ -10,4 +10,8 @@ class Client < ActiveRecord::Base
   has_many :users
 
   alias_attribute :author_id, :user_id
+
+  def author
+    User.find_by(id: author_id)
+  end
 end

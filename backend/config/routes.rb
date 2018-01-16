@@ -203,7 +203,6 @@ Rails.application.routes.draw do
       resources :charts_pattern, only: [:index]
 
       resources :clients
-      get '/clients', to: 'clients#show_tenant'
       get '/clients/theme', to: 'clients#theme'
       get '/clients/manifest', to: 'clients#manifest'
       get '/clients/approve/:encrypted_id', to: 'clients#approve'

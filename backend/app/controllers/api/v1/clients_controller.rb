@@ -21,25 +21,36 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def update
-    client = Client.find_by(id: params[:id])
+    @client = Client.find_by(id: params[:id])
     filename = client_params[:filename]
 
-    client.update_attributes(client_params.permit(:theme_color, :filename))
-    client.logo = client_params[:logo]
-    client.save!
+    @client.update_attributes(client_params.permit(:theme_color, :filename))
+    @client.logo = client_params[:logo]
 
-    render json: client, root_url: root_url if client
-  end
-
-  def show_tenant
-    return unless params[:subdomain].present?
-
-    render json: current_tenant, root_url: root_url, root: 'client'
+    if @client.save!
+      render json: @client, root_url: root_url
+    else
+      render json: @client,
+             serializer: ActiveModel::Serializer::ErrorSerializer,
+             status: :unprocessable_entity
+    end
   end
 
   def approve
-    client = Client.find_by(id: SymmetricEncryption.decrypt(params[:encrypted_id]))
-    client && client.update_attributes(approved: true)
+    binding.pry
+    @client = Client.find_by(id: SymmetricEncryption.decrypt(params[:encrypted_id]))
+
+    if @client.update_attributes(approved: true)
+      user = @client.author
+
+      SubscribeToSendi.perform_async(name: @client.name, email: user.email)
+
+      render json: @client, root_url: root_url
+    else
+      render json: @client,
+             serializer: ActiveModel::Serializer::ErrorSerializer,
+             status: :unprocessable_entity
+    end
   end
 
   def theme

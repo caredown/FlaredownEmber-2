@@ -86,6 +86,7 @@ class Ability
     can :read, NilClass if user.persisted?
 
     can :index, Client
+    can :approve, Client
     can [:manage], Client if user.is_admin?
     can :create, Client if user.is_client?
     can [:show, :update], Client do |client|
