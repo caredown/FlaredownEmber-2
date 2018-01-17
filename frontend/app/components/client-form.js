@@ -5,11 +5,7 @@ const {
   get,
   set,
   setProperties,
-  getProperties,
-  $,
   computed,
-  isPresent,
-  computed: { alias },
   inject: {
     service,
   },
@@ -28,7 +24,6 @@ export default Component.extend({
 
   i18n: service(),
   session: service(),
-  slugName: alias('model.slugName'),
   COLORS,
   waitForApprove: false,
   colorCode: null,

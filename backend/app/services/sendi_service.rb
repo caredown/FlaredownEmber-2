@@ -4,8 +4,8 @@ class SendiService
   attr_accessor :api_key, :email, :name
 
   # Default API endpoints
-  BASE_URL = ENV['SENDI_INSTALLATION'].freeze
-  LIST_ID = ENV['SENDI_LIST_ID'].freeze
+  BASE_URL = ENV['SENDI_INSTALLATION']
+  LIST_ID = ENV['SENDI_LIST_ID']
 
   def initialize(options)
     @api_key = ENV['SENDI_API_KEY']
@@ -14,10 +14,10 @@ class SendiService
   end
 
   def subscribe
-    post('subscribe', { name: name, email: email, boolean: true, list: LIST_ID })
+    post('subscribe', name: name, email: email, boolean: true, list: LIST_ID)
   end
 
-  def get(path, options={})
+  def get(path, options = {})
     execute :get, path, nil, options.to_h
   end
 
@@ -25,7 +25,7 @@ class SendiService
     execute :post, path, data, options
   end
 
-  def execute(method, path, data = nil, options = {})
+  def execute(method, path, data = nil)
     response = request(method, path, data, options)
 
     case response.code
@@ -40,7 +40,7 @@ class SendiService
     end
   end
 
-  def request(method, path, data = nil, options = {})
+  def request(method, path, data = nil)
     headers = {}
     headers['content-type'] = "application/x-www-form-urlencoded"
 

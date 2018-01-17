@@ -8,7 +8,7 @@ const {
 } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, {
-  model(params) {
+  model() {
     return get(this, 'store').createRecord('client');
   },
 });

@@ -31,13 +31,15 @@ class UserSerializer < ApplicationSerializer
 
   has_one :profile, embed_in_root: true
 
+  # rubocop:disable Style/PredicateName
   def is_approved
-    object.is_approved
+    object.approved?
   end
 
   def is_client
-    object.is_client?
+    object.client?
   end
+  # rubocop:enable Style/PredicateName
 
   def client_persisted
     client_id.present?

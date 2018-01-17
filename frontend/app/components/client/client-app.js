@@ -4,7 +4,6 @@ import config from 'flaredown/config/environment';
 const {
   get,
   set,
-  getProperties,
   setProperties,
   computed,
   inject: { service },

@@ -6,7 +6,6 @@ const {
   get,
   setProperties,
   computed,
-  computed: { alias },
   inject: { service },
   Component,
 } = Ember;

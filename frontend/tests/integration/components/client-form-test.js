@@ -10,9 +10,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{client-form}}`);
 
-  assert.equal(this.$().text().trim(), '');
+
+  this.render(hbs`{{client-form}}`);
+  let response = this.$().text().trim().replace(/\s{2,}/g,' ');
+  let text = "App name (maximum 30 characters) Company name (used in the Terms of Service) Color Emerald Amethyst Azure Custom Logo";
+
+  // debugger;
+
+  assert.equal(response, text);
 
   // Template block usage:
   this.render(hbs`
@@ -21,5 +27,5 @@ test('it renders', function(assert) {
     {{/client-form}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(response, text);
 });

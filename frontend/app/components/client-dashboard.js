@@ -1,13 +1,13 @@
 import Ember from 'ember';
-import { translationMacro as t } from "ember-i18n";
 
 const {
   get,
   set,
-  computed: { alias },
+  computed: { alias, isBlank },
   inject: {
     service,
   },
+  $,
   Component,
 } = Ember;
 

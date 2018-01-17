@@ -20,14 +20,16 @@ class ClientCreator
 
   def create
     ActiveRecord::Base.transaction do
-      @client = user.create_client!(name: name,
+      @client = user.create_client!(
+        name: name,
         app_name: app_name,
         slug_name: slug_name,
         theme_color: theme_color,
         background_color: background_color,
         user_id: user.id,
         filename: filename
-    )
+      )
+
       user.update_columns(client_id: @client.id)
     end
 

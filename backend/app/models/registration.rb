@@ -6,7 +6,7 @@ class Registration
 
   validates :screen_name, presence: true
 
-  with_options unless: Proc.new { |object| object.is_client } do |client|
+  with_options unless: proc { |object| object.is_client } do |client|
     client.validates :captcha_response, presence: true
     client.validate :captcha_response_verified
   end

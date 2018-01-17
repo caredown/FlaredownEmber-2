@@ -5,10 +5,6 @@ const {
   get,
   set,
   setProperties,
-  computed,
-  computed: { alias },
-  inject: { service },
-  Component,
 } = Ember;
 
 export default imageCropper.extend({

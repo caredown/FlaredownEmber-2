@@ -69,7 +69,6 @@
     "ember-time-field": "^0.1.5",
     "ember-truth-helpers": "1.2.0",
     "ember-uploader": "^1.2.3",
-    "ember-userengage": "0.1.0",
     "loader.js": "^4.2.3",
     "torii": "^0.8.0"
   },

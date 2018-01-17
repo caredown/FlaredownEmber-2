@@ -26,7 +26,6 @@
 #  client_id              :integer
 #  is_client              :boolean          default: false
 
-
 class User < ActiveRecord::Base
   include Authenticatable
 
@@ -69,24 +68,19 @@ class User < ActiveRecord::Base
   delegate :locale, :notify, :notify_token, :screen_name, to: :profile
   delegate :approved, to: :client
 
-  ROLES = %i[admin client]
+  ROLES = %w(admin client).freeze
 
-  def is_approved
-    return false unless is_client?
-    return false unless client
+  def approved?
+    return false unless client? || client
 
     approved
   end
 
-  def is_author
-    id == client.author_id
-  end
-
-  def is_client?
+  def client?
     role == 'client'
   end
 
-  def is_admin?
+  def admin?
     role == 'admin'
   end
 

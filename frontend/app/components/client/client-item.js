@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import config from 'flaredown/config/environment';
-import { pluralize } from 'ember-inflector';
 
 const {
   get,

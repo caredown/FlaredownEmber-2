@@ -22,7 +22,6 @@ class Api::V1::ClientsController < ApplicationController
 
   def update
     @client = Client.find_by(id: params[:id])
-    filename = client_params[:filename]
 
     @client.update_attributes(client_params.permit(:theme_color, :filename))
     @client.logo = client_params[:logo]
@@ -37,12 +36,12 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def approve
-    binding.pry
     @client = Client.find_by(id: SymmetricEncryption.decrypt(params[:encrypted_id]))
 
     if @client.update_attributes(approved: true)
       user = @client.author
 
+      DnssimpleSubdomainJob.perform_async(slug_name: @client.slug_name)
       SubscribeToSendi.perform_async(name: @client.name, email: user.email)
 
       render json: @client, root_url: root_url
