@@ -4,6 +4,7 @@ const {
   get,
   set,
   computed,
+  isPresent,
   inject: { service },
   Component,
 } = Ember;
@@ -16,6 +17,7 @@ const COLORS =
 export default Component.extend({
   i18n: service(),
   COLORS,
+  customColor: null,
 
   isCustom: computed('model.themeColor', 'COLORS.@each.code', function() {
     const themeColor = get(this, 'model.themeColor');
@@ -31,11 +33,17 @@ export default Component.extend({
   actions: {
     colorChanged(colorCode) {
       set(this, 'isCustom', false);
+      set(this, 'customColor', get(this, 'model.themeColor'));
       set(this, 'model.themeColor', colorCode);
     },
 
     onCustom() {
-      set(this, 'model.themeColor', '');
+      const customColor = get(this, 'customColor');
+
+      if(isPresent(customColor)) {
+        set(this, 'model.themeColor', customColor);
+      }
+
       set(this, 'isCustom', true);
     },
   }

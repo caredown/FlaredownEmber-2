@@ -4,12 +4,20 @@
     {{logout-link}}
   </div>
 
+  <div>{{pluralize model.meta.client_count 'client'}}:</div>
+
   <div class="clientIndexHeader flexContainer">
     <span>APP NAME / URL</span>
     <span>USERS</span>
   </div>
+
   {{#each model as |client|}}
     <hr>
     {{client/client-item client=client}}
   {{/each}}
+
+  <div class="paginationNavs flexContainer">
+    <a href="#" {{action 'onPrev'}}>‹</a>
+    <a href="#" {{action 'onNext'}}>›</a>
+  </div>
 </div>

@@ -6,7 +6,9 @@ class Api::V1::ClientsController < ApplicationController
     if params[:subdomain].present?
       render json: current_tenant, root_url: root_url, root: 'client'
     else
-      render json: @clients, root_url: root_url
+      page = params[:page] || 1
+
+      render json: @clients.page(page).per(5), root_url: root_url, meta: { client_count: Client.count }
     end
   end
 
