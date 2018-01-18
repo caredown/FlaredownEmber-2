@@ -39,6 +39,7 @@ class Api::V1::ClientsController < ApplicationController
 
   def approve
     @client = Client.find_by(id: SymmetricEncryption.decrypt(params[:encrypted_id]))
+    return unless @client
 
     if @client.update_attributes(approved: true)
       user = @client.author
@@ -48,7 +49,7 @@ class Api::V1::ClientsController < ApplicationController
 
       render json: @client, root_url: root_url
     else
-      render json: @client,
+      render json: @client.errors,
              serializer: ActiveModel::Serializer::ErrorSerializer,
              status: :unprocessable_entity
     end
