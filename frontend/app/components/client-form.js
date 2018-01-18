@@ -57,8 +57,9 @@ export default Component.extend({
     save() {
       const model = get(this, 'model');
       const logoData = get(this, 'logoData');
+      const slugName = get(this, 'slugName');
 
-      set(this, 'showPreview', false);
+      setProperties(model, { slugName: slugName, showPreview: false });
 
       if (logoData) {
         setProperties(model, logoData);

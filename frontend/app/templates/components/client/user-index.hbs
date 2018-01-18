@@ -1,4 +1,4 @@
-{{#if (gt userCount 1)}}
+{{#if (or (gt userCount 1) userIsAdmin)}}
   <div class="flexContainer alignCenter">
     <b>{{pluralize userCount "user"}}</b>
     <button class="history-btn small-btn" {{action "onInvite"}}>
@@ -8,7 +8,7 @@
 
   {{#each users as |user|}}
     <hr>
-    {{client/user-show user=user}}
+    {{client/user-show user=user userIsAdmin=userIsAdmin}}
   {{/each}}
 
   <div class="paginationNavs flexContainer">

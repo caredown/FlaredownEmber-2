@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     page = params[:page] || 1
-    @users = User.accessible_by(current_ability).all
+    @users = User.accessible_by(current_ability).where(client_id: params[:client_id])
 
     render json: @users.page(page).per(10)
   end

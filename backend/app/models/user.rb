@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   ROLES = %w(admin client).freeze
 
   def approved?
-    return false unless client? || client
+    return false unless client? && client
 
     approved
   end

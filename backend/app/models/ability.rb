@@ -93,7 +93,8 @@ class Ability
       user.client? && user.id == client.author_id
     end
 
-    can [:manage], User, client_id: user.client.try(:id)
+    can [:manage], User, client_id: user.client.present? && user.client.id
+    can [:manage], User if user.admin?
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, CyclomaticComplexity, PerceivedComplexity
 

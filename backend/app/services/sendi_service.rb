@@ -17,16 +17,16 @@ class SendiService
     post('subscribe', name: name, email: email, boolean: true, list: LIST_ID)
   end
 
-  def get(path, options = {})
-    execute :get, path, nil, options.to_h
+  def get(path)
+    execute :get, path, nil
   end
 
-  def post(path, data = nil, options = {})
-    execute :post, path, data, options
+  def post(path, data = nil)
+    execute :post, path, data
   end
 
   def execute(method, path, data = nil)
-    response = request(method, path, data, options)
+    response = request(method, path, data)
 
     case response.code
     when 200..299

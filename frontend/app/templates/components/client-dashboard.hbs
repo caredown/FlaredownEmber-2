@@ -1,5 +1,5 @@
-{{#if model.approved}}
-  {{client/client-show model=model}}
+{{#if (or model.approved userIsAdmin)}}
+  {{client/client-show model=model userIsAdmin=userIsAdmin}}
 {{else}}
   {{client/wait-approval}}
 {{/if}}

@@ -6,6 +6,7 @@ class ClientApprovementMailer < ApplicationMailer
     @client = Client.find_by(id: client_id)
     return unless @client
 
+    @email = @client.author.try(:email)
     encrypted_client_id = SymmetricEncryption.encrypt(@client.id)
     @approvement_link = ENV['BASE_URL'] + "/approved/#{encrypted_client_id}"
 
