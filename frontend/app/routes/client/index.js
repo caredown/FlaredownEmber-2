@@ -3,6 +3,7 @@ import AuthenticatedRouteMixin from 'flaredown/mixins/authenticated-route-mixin'
 
 const {
   get,
+  getProperties,
   Route,
 } = Ember;
 
@@ -16,6 +17,24 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   page: 1,
+
+  beforeModel(){
+    this._super(...arguments);
+
+    if(get(this, 'session.isAuthenticated')) {
+      return get(this, 'session.currentUser').then(currentUser => {
+        const { clientPersisted, role } = getProperties(currentUser, 'clientPersisted', 'role');
+
+        if(role === 'admin') {
+          this.transitionTo('client');
+        } else if(role === 'client') {
+          clientPersisted ? this.transitionTo('client.show', get(currentUser, 'client.id')) : this.transitionTo('client.new');
+        } else {
+          this.get('session').invalidate();
+        }
+      });
+    }
+  },
 
   model(params) {
     return this.store.query('client', { page: params.page }).then((response) => {

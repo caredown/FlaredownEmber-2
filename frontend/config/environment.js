@@ -3,7 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     rootURL: '/',
-    clientRootURL: '/client/login',
+    clientRootURL: '/client',
     environment: environment,
     modulePrefix: 'flaredown',
     locationType: 'router-scroll',
