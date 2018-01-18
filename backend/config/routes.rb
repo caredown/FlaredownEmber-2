@@ -192,7 +192,7 @@ Rails.application.routes.draw do
       #
       # Users
       #
-      resources :users, only: [:show]
+      resources :users, only: [:index, :show, :destroy]
 
       #
       # Weathers
@@ -202,9 +202,10 @@ Rails.application.routes.draw do
       resources :patterns
       resources :charts_pattern, only: [:index]
 
-      get '/clients', to: 'clients#show'
+      resources :clients
       get '/clients/theme', to: 'clients#theme'
       get '/clients/manifest', to: 'clients#manifest'
+      get '/clients/approve/:encrypted_id', to: 'clients#approve'
     end
   end
 end

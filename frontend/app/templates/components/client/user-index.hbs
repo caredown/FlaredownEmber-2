@@ -1,0 +1,21 @@
+{{#if (or (gt userCount 1) userIsAdmin)}}
+  <div class="flexContainer alignCenter">
+    <b>{{pluralize userCount "user"}}</b>
+    <button class="history-btn small-btn" {{action "onInvite"}}>
+      {{t "clientAccess.dashboard.userIndex.btnValue"}}
+    </button>
+  </div>
+
+  {{#each users as |user|}}
+    <hr>
+    {{client/user-show user=user userIsAdmin=userIsAdmin}}
+  {{/each}}
+
+  <div class="paginationNavs flexContainer">
+    <a href="#" {{action 'onPrev'}}>‹</a>
+    <a href="#" {{action 'onNext'}}>›</a>
+  </div>
+
+{{else}}
+  {{client/invite-users model=model}}
+{{/if}}

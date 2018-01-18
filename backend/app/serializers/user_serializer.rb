@@ -26,9 +26,24 @@
 #
 
 class UserSerializer < ApplicationSerializer
-  attributes :id, :email, :intercom_hash, :topic_following_id
+  attributes :id, :email, :intercom_hash, :topic_following_id,
+             :is_approved, :is_client, :client_id, :client_persisted, :role
 
   has_one :profile, embed_in_root: true
+
+  # rubocop:disable Style/PredicateName
+  def is_approved
+    object.approved?
+  end
+
+  def is_client
+    object.client?
+  end
+  # rubocop:enable Style/PredicateName
+
+  def client_persisted
+    client_id.present?
+  end
 
   def topic_following_id
     [] # TO DO object.topic_following.id

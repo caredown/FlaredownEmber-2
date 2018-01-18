@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, CyclomaticComplexity, PerceivedComplexity
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
@@ -84,8 +84,19 @@ class Ability
 
     can :read, Weather if user.persisted?
     can :read, NilClass if user.persisted?
+
+    can :index, Client
+    can :approve, Client
+    can [:manage], Client if user.admin?
+    can :create, Client if user.client?
+    can [:show, :update], Client do |client|
+      user.client? && user.id == client.author_id
+    end
+
+    can [:manage], User, client_id: user.client.present? && user.client.id
+    can [:manage], User if user.admin?
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, CyclomaticComplexity, PerceivedComplexity
 
   private
 

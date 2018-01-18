@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-const { Model, attr } = DS;
+const { Model, attr, hasMany } = DS;
 
 export default Model.extend({
   name: attr('string'),
@@ -11,4 +11,11 @@ export default Model.extend({
   logo: attr('string'),
   termOfService: attr('raw'),
   privacyPolicy: attr('raw'),
+  authorId: attr('string'),
+  approved: attr('boolean'),
+  filename: attr('string'),
+  filetype: attr('string'),
+  userCount: attr(),
+
+  users: hasMany('user', { async: false }),
 });

@@ -1,5 +1,9 @@
-{{#form-for for=model onSubmit="save"}}
+{{#if clientAccess}}
+  <h3 class="centered">{{headerText}}</h3>
+  <span class="info">{{infoText}}</span>
+{{/if}}
 
+{{#form-for for=model onSubmit="save"}}
   {{#form-field for="email" label="Email"}}
     {{input value=model.email placeholder="Enter your email" class="fs-private"}}
   {{/form-field}}
@@ -8,17 +12,19 @@
     {{input type="password" value=model.password placeholder="Enter a secure password"}}
   {{/form-field}}
 
-  {{#form-field for="screenName" label="Username"}}
-    {{input value=model.screenName placeholder="Enter a username" class="fs-private"}}
+  {{#form-field for="screenName" label=nameLabel}}
+    {{input value=model.screenName placeholder=namePlaceholder class="fs-private"}}
   {{/form-field}}
 
-  {{#form-field for="captchaResponse" label="Are you a robot?"}}
-    {{g-recaptcha onSuccess=(action "onCaptchaResolved") ref=(mut gRecaptcha) }}
-  {{/form-field}}
+  {{#unless clientAccess}}
+    {{#form-field for="captchaResponse" label="Are you a robot?"}}
+      {{g-recaptcha onSuccess=(action "onCaptchaResolved") ref=(mut gRecaptcha) }}
+    {{/form-field}}
+  {{/unless}}
 
   <br>
-  <p>Already have an account? {{#link-to 'login'}}Log in{{/link-to}}</p>
-  {{input type="submit" class="btn btn-default left" value="Signup"}}
+  <p>Already have an account? {{#link-to loginRoute}}Log in{{/link-to}}</p>
+  {{input type="submit" class="btn btn-default left" value=submitBtnText}}
 {{/form-for}}
 
 {{#if errorMessage}}

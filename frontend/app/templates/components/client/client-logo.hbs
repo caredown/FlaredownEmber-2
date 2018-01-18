@@ -1,0 +1,13 @@
+{{file-upload model=model url='clients/upload' onChanged=(action 'logoSelected')}}
+
+{{#if showPreview}}
+  <div class="cropper-container">
+    <img id="clientLogo" class="clientLogo" src={{fileData}}>
+    <hr>
+  </div>
+
+  <div id="logo-preview"></div>
+
+  <button type="button" {{action 'getCroppedLogo'}}>Crop</button>
+  <button type="button" {{action 'cancelCrop'}}>Cancel Crop</button>
+{{/if}}

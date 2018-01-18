@@ -1,0 +1,77 @@
+.client-dashboard {
+  @include outer-container;
+  @include single-col;
+
+  .flexContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .alignBaseline {
+    align-items: baseline;
+  }
+
+  .alignCenter {
+    align-items: center;
+  }
+
+  .clientIndexHeader {
+    margin-top: 1em;
+  }
+
+  .paginationNavs {
+    font-size: 2.2em;
+    margin-top: 20px;
+  }
+
+  .inviteBox {
+    margin-top: 1.2em;
+  }
+
+  .admin-nav-links {
+    .backToClient {
+      margin-right: 1em;
+    }
+  }
+
+  .btn-client {
+    button {
+      color: black;
+      font-weight: normal;
+      font-size: 1.2em;
+      background-color: transparent;
+      padding-left: 0;
+
+      &.active {
+        font-weight: 600;
+      }
+
+      &:hover,
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+
+  input[type=submit] {
+    margin-top: 1em;
+  }
+}
+
+img {
+  max-width: 100%;
+
+  &.clientLogo {
+    border: 1px solid $grey;
+  }
+}
+
+.waitApproval {
+  font-size: 1.2em;
+
+  svg { margin-bottom: 1em; }
+}
+
+.clientBgText {
+  font-size: 1.4em;
+}

@@ -114,4 +114,31 @@ export default {
       loadMore: 'Load more...',
     },
   },
+
+  clientAccess: {
+    defaultAppName: 'Caredown',
+    signupMessage: 'Your request is being processed',
+    signup: {
+      header: 'Create your Caredown account',
+      info: 'Please note: custom apps are <b>only avaliable in English</b> at this time',
+    },
+    new: {
+      headerText: 'Set up your app',
+    },
+    dashboard: {
+      wait: {
+        grats: 'Nice work! <br> We\'re setting up your app now, you\'ll receive an email when it\'s ready.',
+        btnValue: 'Back to Caredown',
+      },
+      invite: {
+        header: 'Let\'s get your users on board!',
+        btnValue: 'Send Email Invites',
+        linkText: 'Or, ask them to visit this link:',
+      },
+
+      userIndex: {
+        btnValue: '+ Invite users',
+      }
+    },
+  }
 };

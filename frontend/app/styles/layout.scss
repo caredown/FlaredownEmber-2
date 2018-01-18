@@ -61,6 +61,10 @@ h5 {
   }
 }
 
+header.emptyHeader {
+  margin-bottom: 3em;
+}
+
 header.navigation {
   padding-top: 1em;
 }
@@ -310,4 +314,11 @@ span.ember-power-select-clear-btn {
   strong {
     color: $primary;
   }
+}
+
+//  Client signup
+
+.info {
+  display: inline-block;
+  margin-bottom: 1em;
 }

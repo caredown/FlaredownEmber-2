@@ -2,15 +2,32 @@ import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
 const {
+  get,
   Route,
   inject: {
     service,
   },
+  getProperties,
 } = Ember;
 
 export default Route.extend(ApplicationRouteMixin, {
   notifications: service(),
   session: service(),
+  clientDispatcher: service(),
+
+  sessionAuthenticated() {
+    this._super(...arguments);
+
+    get(this, 'session.currentUser').then(currentUser => {
+      const { clientPersisted, role } = getProperties(currentUser, 'clientPersisted', 'role');
+
+      if(role === 'admin') {
+        this.transitionTo('client');
+      } else if(role === 'client') {
+        clientPersisted ? this.transitionTo('client.show', get(currentUser, 'client.id')) : this.transitionTo('client.new');
+      }
+    });
+  },
 
   actions: {
     routeToLogin() {

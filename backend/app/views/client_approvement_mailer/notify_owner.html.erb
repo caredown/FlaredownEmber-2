@@ -1,0 +1,16 @@
+<% content_for :body do %>
+  <div style="font-family: arial, sans-serif;">
+    <h2>New request for approvement</h2>
+    <h3><%= @client_email %></h3>
+
+    <br>
+    <span style="font-weight: 600;">Name: </span> <%= @client.name %><br>
+    <span style="font-weight: 600;">App name: </span> <%= @client.app_name %><br>
+    <span style="font-weight: 600;">Subdomain: </span> <%= @client.slug_name %><br>
+    <span style="font-weight: 600;">Author email: </span> <%= @email %><br>
+    <span style="font-weight: 600;">Theme color: </span> <%= @client.theme_color || 'none' %><br>
+
+
+    <p>You can <%= link_to 'approve', @approvement_link %> this Client</p>
+  </div>
+<% end %>

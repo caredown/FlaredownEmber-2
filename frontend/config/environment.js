@@ -3,11 +3,13 @@
 module.exports = function(environment) {
   var ENV = {
     rootURL: '/',
+    clientRootURL: '/client/login',
     environment: environment,
     modulePrefix: 'flaredown',
     locationType: 'router-scroll',
     historySupportMiddleware: true,
     encryptionSecret: 'flaredown-symptom-tracker',
+    caredownLink: 'http://caredown.com/',
 
     EmberENV: {
       FEATURES: {
@@ -33,10 +35,6 @@ module.exports = function(environment) {
 
     pusher: {
       'key': process.env.PUSHER_KEY
-    },
-
-    userEngage: {
-      apiKey: process.env.USERENGAGE_API_KEY
     },
 
     gReCaptcha: {

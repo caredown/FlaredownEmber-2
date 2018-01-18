@@ -8,6 +8,14 @@ const Router = Ember.Router.extend(RouterScroll, {
 });
 
 Router.map(function() {
+
+  this.route('client', function() {
+    this.route('login');
+    this.route('signup');
+    this.route('new')
+    this.route('show', { path: '/:client_id' });
+  });
+
   this.route('login');
   this.route('signup');
   this.route('chart');
@@ -44,6 +52,7 @@ Router.map(function() {
   });
 
   this.route('unsubscribe', { path: 'unsubscribe/:notify_token' });
+  this.route('approved', { path: 'approved/:id' });
   this.route('notifications');
 
   this.route('oracle', function() {

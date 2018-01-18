@@ -1,0 +1,10 @@
+{{#each COLORS as |color|}}
+  {{#radio-button name="color" value=color.code groupValue=model.themeColor changed="colorChanged"}}
+    {{color.name}}
+  {{/radio-button}}
+{{/each}}
+{{#radio-button name='color' value=customColorValue groupValue=model.themeColor changed="onCustom"}}Custom{{/radio-button}}
+
+{{#if isCustom}}
+  {{input type="text" class="themeColor" value=model.themeColor placeholder="Enter Theme Color in HEX format"}}
+{{/if}}

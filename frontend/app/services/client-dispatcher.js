@@ -18,10 +18,17 @@ export default Service.extend({
 
   showForCaredown: config.showForCaredown,
   DOMAINS: config.DOMAINS,
-  caredownSubdomain: computed('location.host', function() {
+
+  caredownSubdomain: computed(function() {
     if (typeof location !== 'undefined') {
       return location.host.split('.')[0];
     }
+  }),
+
+  isEmptySubdomain: computed('caredownSubdomain', function() {
+    const subdomain = get(this, 'caredownSubdomain');
+
+    return (subdomain == 'stg' || subdomain == 'caredown');
   }),
 
   fetchData() {
