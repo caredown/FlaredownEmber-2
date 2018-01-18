@@ -8,6 +8,8 @@ const {
 } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, {
+  authenticationRoute: '/client/login',
+
   model() {
     return get(this, 'store').createRecord('client');
   },

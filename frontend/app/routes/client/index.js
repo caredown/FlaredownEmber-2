@@ -7,6 +7,8 @@ const {
 } = Ember;
 
 export default Route.extend(AuthenticatedRouteMixin, {
+  authenticationRoute: '/client/login',
+
   queryParams: {
     page: {
       refreshModel: true
