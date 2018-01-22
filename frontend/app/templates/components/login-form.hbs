@@ -1,3 +1,7 @@
+{{#if isEmptySubdomain}}
+  <h4 class="centered ">{{t "clientAccess.login.header"}}</h4>
+{{/if}}
+
 {{#form-for onSubmit=(action "authenticateWithDevise")}}
   <div class="form-field">
     <label for="identification">Email</label>
@@ -7,6 +11,7 @@
     <label for="password">Password</label>
     {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
   </div>
+
   <p>
     Not a member yet? {{#link-to signupPath}}Signup Now{{/link-to}}
   </p>

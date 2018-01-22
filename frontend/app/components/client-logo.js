@@ -11,8 +11,12 @@ export default Component.extend({
   attributeBindings: 'src',
   classNameBindings: ['logoClassNames'],
 
-  logoClassNames: computed('logoClass', function() {
-    return get(this, 'logoClass') || '';
+  isAdminSubdomain: false,
+
+  logoClassNames: computed('logoClass', 'isAdminSubdomain', function() {
+    const isAdminSubdomain = get(this, 'isAdminSubdomain');
+
+    return isAdminSubdomain ? 'admin-logo' : get(this, 'logoClass');
   }),
 
   src: computed('logoPath', function() {
