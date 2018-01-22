@@ -12,4 +12,16 @@ class ClientApprovementMailer < ApplicationMailer
 
     mail(to: ENV['SMTP_EMAIL_FROM'], from: ENV['SMTP_EMAIL_FROM'], subject: 'Request for approvement"')
   end
+
+  def notify_client(client_email, client_id)
+    @client = Client.find_by(id: client_id)
+    return unless @client
+
+    slug_name = @client.slug_name
+    subdomain = ENV['APP_ENV'] == 'staging' ? "#{slug_name}.stg" : slug_name
+
+    @app_link = "#{slug_name}.caredown.com"
+
+    mail(to: client_email, from: ENV['SMTP_EMAIL_FROM'], subject: 'Request was approved')
+  end
 end
