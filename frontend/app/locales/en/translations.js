@@ -118,6 +118,9 @@ export default {
   clientAccess: {
     defaultAppName: 'Caredown',
     signupMessage: 'Your request is being processed',
+    login: {
+      header: 'Administrator Login',
+    },
     signup: {
       header: 'Create your Caredown account',
       info: 'Please note: custom apps are <b>only avaliable in English</b> at this time',

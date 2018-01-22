@@ -21,7 +21,7 @@ class DNSService
   end
 
   def create_subdomain
-    subdomain = ENV['APP_ENV'] == 'staging' ? "#{self.slug_name}.stg" : self.slug_name
+    subdomain = ENV['APP_ENV'] == 'staging' ? "#{slug_name}.stg" : slug_name
 
     client.zones.create_record(ACCOUNT_ID, ZONE_ID, name: subdomain, type: 'CNAME', ttl: 3600, content: CONTENT)
   end

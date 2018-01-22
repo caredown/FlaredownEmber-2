@@ -1,9 +1,5 @@
 {{#application-wrapper as |config|}}
-  {{#if config.isEmptySubdomain}}
-    <header class="emptyHeader"></header>
-  {{else}}
-    {{partial "application/header"}}
-  {{/if}}
+  {{partial "application/header"}}
 
   {{outlet}}
 

@@ -17,7 +17,6 @@ export default Service.extend({
   appName: null,
 
   showForCaredown: config.showForCaredown,
-  DOMAINS: config.DOMAINS,
 
   caredownSubdomain: computed(function() {
     if (typeof location !== 'undefined') {
@@ -28,7 +27,7 @@ export default Service.extend({
   isEmptySubdomain: computed('caredownSubdomain', function() {
     const subdomain = get(this, 'caredownSubdomain');
 
-    return (subdomain == 'stg' || subdomain == 'caredown');
+    return subdomain === 'admin';
   }),
 
   fetchData() {
