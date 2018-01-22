@@ -4,6 +4,7 @@ import { translationMacro as t } from "ember-i18n";
 const {
   $,
   get,
+  set,
   isEmpty,
   computed: { alias },
   inject: { service },
@@ -17,6 +18,7 @@ export default Component.extend({
   defaultAppName: t("clientAccess.defaultAppName"),
 
   isEmptySubdomain: alias('clientDispatcher.isEmptySubdomain'),
+  invalidSubdomain: false,
 
   init() {
     this._super(...arguments);
@@ -24,13 +26,25 @@ export default Component.extend({
     if(get(this, 'isEmptySubdomain')){
       this.setClientMeta({});
     } else {
-      get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this));
+      get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this), this._notFound.bind(this));
     }
   },
 
   _loaded(client) {
-    if (typeof Fastboot === 'undefined') {
-      this.setClientMeta(client);
+    if(client) {
+      if (typeof Fastboot === 'undefined') {
+        this.setClientMeta(client);
+      }
+    } else {
+      set(this, 'invalidSubdomain', true);
+    }
+  },
+
+  _notFound() {
+    const isAdminSubdomain = get(this, 'isEmptySubdomain');
+
+    if(!isAdminSubdomain) {
+      set(this, 'invalidSubdomain', true);
     }
   },
 

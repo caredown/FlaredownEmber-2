@@ -7,9 +7,9 @@ class Client < ActiveRecord::Base
   validates :slug_name,
             presence: true,
             uniqueness: true,
-            exclusion: { in: %w(admin), message: "Do not allowed such App name" },
+            exclusion: { in: %w(admin api stg), message: "Do not allowed such App name" },
             format: { with: Regexp.new('\A' + SLUG_FORMAT.source + '\z'),
-                      message: 'Subdomain should be lowercase with dashes instead of space' }
+                      message: 'Subdomain should be lowercase with dashes instead of space and dots' }
 
   has_many :users
 

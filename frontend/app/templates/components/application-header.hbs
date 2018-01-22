@@ -1,0 +1,15 @@
+{{#unless (includes currentPath 'oracle' 'oracle.index' 'oracle.result')}}
+  <header class="centered navigation" role="banner">
+    {{#if (and session.isAuthenticated (not isAdminSubdomain))}}
+      {{navigation-bar}}
+    {{else}}
+      {{toggle-logo currentPath=currentPath isAdminSubdomain=isAdminSubdomain}}
+
+      {{#if (or (eq currentPath 'login') (eq currentPath 'signup') (eq currentPath 'password.reset') (not isAdminSubdomain) )}}
+        <h4>{{client-appname isAdminSubdomain=isAdminSubdomain}}</h4>
+      {{else}}
+        <h4 class="centered ">{{t "clientAccess.login.header"}}</h4>
+      {{/if}}
+    {{/if}}
+  </header>
+{{/unless}}

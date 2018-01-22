@@ -4,6 +4,8 @@ class Api::V1::ClientsController < ApplicationController
 
   def index
     if params[:subdomain].present?
+      raise ActiveRecord::RecordNotFound if current_tenant.nil?
+
       render json: current_tenant, root_url: root_url, root: 'client'
     else
       page = params[:page] || 1
@@ -44,8 +46,7 @@ class Api::V1::ClientsController < ApplicationController
     if @client.update_attributes(approved: true)
       user = @client.author
 
-      ClientApprovementMailer.notify_client(user.email, @client.id).delivery_later
-      DnssimpleSubdomainJob.perform_async(slug_name: @client.slug_name)
+      ClientApprovementMailer.notify_client(user.email, @client.id).deliver_later
       SubscribeToSendi.perform_async(name: @client.name, email: user.email)
 
       render json: @client, root_url: root_url
