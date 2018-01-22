@@ -1,1 +1,6 @@
-{{client.appName}}
+{{#if isAdminSubdomain}}
+  {{defaultAppname}}
+{{else}}
+  {{client.appName}}
+{{/if}}
+

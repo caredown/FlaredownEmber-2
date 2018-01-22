@@ -7,7 +7,7 @@ const {
   inject: { service },
   Service,
   setProperties,
-  RSVP: { resolve }
+  RSVP: { Promise }
 } = Ember;
 
 export default Service.extend({
@@ -15,6 +15,7 @@ export default Service.extend({
 
   logoPath: null,
   appName: null,
+  defaultAppname: 'Caredown',
 
   showForCaredown: config.showForCaredown,
 
@@ -35,16 +36,19 @@ export default Service.extend({
     const subdomain = get(this, 'caredownSubdomain');
     const storedClient = get(store.peekAll('client').filterBy('slugName', subdomain), 'firstObject');
 
-    if(storedClient) {
-      return resolve(storedClient);
-    } else {
-      return store.queryRecord('client', { subdomain }).then((client) => {
-        if (client) {
-          return setProperties(this, { logoPath: get(client, 'logo'), appName: get(client, 'appName') });
-        } else {
-          return {};
-        }
-      });
-    }
+    return new Promise((resolve, reject) => {
+      if(storedClient) {
+        resolve(storedClient);
+      } else {
+        store.queryRecord('client', { subdomain }).then((client) => {
+          if (client) {
+            setProperties(this, { logoPath: get(client, 'logo'), appName: get(client, 'appName') });
+            resolve(client);
+          } else {
+            reject();
+          }
+        }, reject);
+      }
+    });
   }
 });

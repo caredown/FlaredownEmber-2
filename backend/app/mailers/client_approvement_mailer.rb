@@ -20,7 +20,7 @@ class ClientApprovementMailer < ApplicationMailer
     slug_name = @client.slug_name
     subdomain = ENV['APP_ENV'] == 'staging' ? "#{slug_name}.stg" : slug_name
 
-    @app_link = "#{slug_name}.caredown.com"
+    @app_link = "#{subdomain}.caredown.com"
 
     mail(to: client_email, from: ENV['SMTP_EMAIL_FROM'], subject: 'Request was approved')
   end

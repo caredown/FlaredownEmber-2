@@ -116,6 +116,7 @@ export default {
   },
 
   clientAccess: {
+    invalidSubdomain: 'There is no such subdomain',
     defaultAppName: 'Caredown',
     signupMessage: 'Your request is being processed',
     login: {

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 const {
   get,
+  set,
   Component,
   computed,
   computed: {
@@ -10,7 +11,6 @@ const {
   inject: {
     service,
   },
-  isEmpty,
 } = Ember;
 
 export default Component.extend({
@@ -20,11 +20,20 @@ export default Component.extend({
   showHeaderLogo: alias('logoVisiability.showHeaderLogo'),
   showHeaderPath: alias('logoVisiability.showHeaderPath'),
   isEmptySubdomain: alias('clientDispatcher.isEmptySubdomain'),
+  isAdminSubdomain: false,
   adminLogoPath: '/assets/caredown_logo.png',
+  defaultLogo: false,
 
-  logoPath: computed('clientDispatcher.logoPath', function() {
+  logoPath: computed('clientDispatcher.logoPath', 'isAdminSubdomain', function() {
     const clientLogo = get(this, 'clientDispatcher.logoPath');
+    const isAdminSubdomain = get(this, 'isAdminSubdomain');
 
-    return isEmpty(clientLogo) ? get(this, 'adminLogoPath') : clientLogo;
+    if(isAdminSubdomain) {
+      set(this, 'defaultLogo', true);
+
+      return get(this, 'adminLogoPath');
+    } else {
+      return clientLogo;
+    }
   }),
 });
