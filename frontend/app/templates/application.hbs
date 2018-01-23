@@ -1,6 +1,6 @@
 {{#application-wrapper as |config|}}
-  {{#if config.invalidSubdomain}}
-    {{invalid-subdomain}}
+  {{#if (or config.invalidSubdomain (not config.clientApproved) )}}
+    {{invalid-subdomain invalidSubdomain=config.invalidSubdomain}}
   {{else}}
     {{application-header currentPath=currentPath isAdminSubdomain=config.isEmptySubdomain}}
 
