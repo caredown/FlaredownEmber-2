@@ -19,6 +19,7 @@ export default Component.extend({
 
   isEmptySubdomain: alias('clientDispatcher.isEmptySubdomain'),
   invalidSubdomain: false,
+  clientApproved: true,
 
   init() {
     this._super(...arguments);
@@ -32,8 +33,14 @@ export default Component.extend({
 
   _loaded(client) {
     if(client) {
+      const isApproved = get(client, 'approved');
+
       if (typeof Fastboot === 'undefined') {
-        this.setClientMeta(client);
+        if(isApproved) {
+          this.setClientMeta(client);
+        } else {
+          set(this, 'clientApproved', false);
+        }
       }
     } else {
       set(this, 'invalidSubdomain', true);

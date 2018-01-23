@@ -19,7 +19,9 @@ export default Component.extend({
   }),
 
   _loaded(client) {
-    set(this, 'client', client);
+    if (!(get(this, 'isDestroyed') || get(this, 'isDestroying'))) {
+      set(this, 'client', client);
+    }
   },
 
   _notFound() {
