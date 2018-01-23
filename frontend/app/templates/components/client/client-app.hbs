@@ -19,5 +19,5 @@
     {{client/client-logo onCrop=(action 'setLogo') showPreview=showPreview}}
   {{/form-field}}
 
-  {{input type="submit" class="btn btn-default left" value="Save"}}
+  {{input type="submit" class="btn btn-default left" value=(if isLoading "Saving..." "Save") disabled=isLoading}}
 {{/form-for}}

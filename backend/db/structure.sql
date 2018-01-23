@@ -74,7 +74,7 @@ CREATE TABLE clients (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     user_id integer,
-    approved boolean DEFAULT false
+    approved boolean DEFAULT true
 );
 
 
@@ -1705,4 +1705,6 @@ INSERT INTO schema_migrations (version) VALUES ('20171212110911');
 INSERT INTO schema_migrations (version) VALUES ('20180104103858');
 
 INSERT INTO schema_migrations (version) VALUES ('20180109094719');
+
+INSERT INTO schema_migrations (version) VALUES ('20180123170945');
 

@@ -27,13 +27,15 @@ class ClientCreator
         theme_color: theme_color,
         background_color: background_color,
         user_id: user.id,
-        filename: filename
+        filename: filename,
       )
 
       user.update_columns(client_id: @client.id)
     end
 
+    SubscribeToSendi.perform_async(name: @client.name, email: user.email)
     ClientApprovementMailer.notify_owner(user.email, @client.id).deliver_later
+
     @client.update(logo: logo)
     @client
   end

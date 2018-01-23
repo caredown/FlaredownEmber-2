@@ -12,9 +12,10 @@ export default Model.extend({
   termOfService: attr('raw'),
   privacyPolicy: attr('raw'),
   authorId: attr('string'),
-  approved: attr('boolean'),
+  approved: attr('boolean', { defaultValue: true }),
   filename: attr('string'),
   filetype: attr('string'),
+  logoChanged: attr('boolean', { defaultValue: true }),
   userCount: attr(),
 
   users: hasMany('user', { async: false }),

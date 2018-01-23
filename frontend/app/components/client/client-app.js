@@ -27,6 +27,8 @@ export default Component.extend({
     },
 
     save() {
+      set(this, 'isLoading', true);
+
       const model = get(this, 'model');
       const logoData = get(this, 'logoData');
 
@@ -34,10 +36,13 @@ export default Component.extend({
 
       if (logoData) {
         setProperties(model, logoData);
+      } else {
+        set(model, 'logoChanged', false);
       }
 
       model.save().finally(() => {
         this.$('.clinet-logo').trigger('onSaved');
+        set(this, 'isLoading', false);
       });
     },
   }

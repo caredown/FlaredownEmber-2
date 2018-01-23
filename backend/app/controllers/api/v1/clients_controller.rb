@@ -28,30 +28,12 @@ class Api::V1::ClientsController < ApplicationController
     @client = Client.find_by(id: params[:id])
 
     @client.update_attributes(client_params.permit(:theme_color, :filename))
-    @client.logo = client_params[:logo]
+    @client.logo = client_params[:logo] if client_params[:logo_changed]
 
     if @client.save!
       render json: @client, root_url: root_url
     else
       render json: @client,
-             serializer: ActiveModel::Serializer::ErrorSerializer,
-             status: :unprocessable_entity
-    end
-  end
-
-  def approve
-    @client = Client.find_by(id: SymmetricEncryption.decrypt(params[:encrypted_id]))
-    return unless @client
-
-    if @client.update_attributes(approved: true)
-      user = @client.author
-
-      ClientApprovementMailer.notify_client(user.email, @client.id).deliver_later
-      SubscribeToSendi.perform_async(name: @client.name, email: user.email)
-
-      render json: @client, root_url: root_url
-    else
-      render json: @client.errors,
              serializer: ActiveModel::Serializer::ErrorSerializer,
              status: :unprocessable_entity
     end
