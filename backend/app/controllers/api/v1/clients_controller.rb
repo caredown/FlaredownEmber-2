@@ -4,7 +4,7 @@ class Api::V1::ClientsController < ApplicationController
 
   def index
     if params[:subdomain].present?
-      raise ActiveRecord::RecordNotFound if current_tenant.nil?
+      raise ActiveRecord::RecordNotFound unless current_tenant.present?
 
       render json: current_tenant, root_url: root_url, root: 'client'
     else
