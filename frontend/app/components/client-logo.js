@@ -11,8 +11,12 @@ export default Component.extend({
   attributeBindings: 'src',
   classNameBindings: ['logoClassNames'],
 
-  logoClassNames: computed('logoClass', function() {
-    return get(this, 'logoClass') || '';
+  defaultLogo: false,
+
+  logoClassNames: computed('logoClass', 'defaultLogo', function() {
+    const defaultLogo = get(this, 'defaultLogo');
+
+    return defaultLogo ? 'admin-logo' : get(this, 'logoClass');
   }),
 
   src: computed('logoPath', function() {

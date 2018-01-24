@@ -1,8 +1,12 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 const {
   $,
   get,
+  set,
+  isEmpty,
+  computed: { alias },
   inject: { service },
   Component,
 } = Ember;
@@ -10,24 +14,55 @@ const {
 export default Component.extend({
   clientDispatcher: service(),
   store: service(),
+  i18n: service(),
+  defaultAppName: t("clientAccess.defaultAppName"),
+
+  isEmptySubdomain: alias('clientDispatcher.isEmptySubdomain'),
+  invalidSubdomain: false,
+  clientApproved: true,
 
   init() {
     this._super(...arguments);
 
-    get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this));
+    if(get(this, 'isEmptySubdomain')){
+      this.setClientMeta({});
+    } else {
+      get(this, 'clientDispatcher').fetchData().then(this._loaded.bind(this), this._notFound.bind(this));
+    }
   },
 
   _loaded(client) {
-    if (typeof Fastboot === 'undefined') {
-      this.setClientMeta(client);
+    if(client) {
+      const isApproved = get(client, 'approved');
+
+      if (typeof Fastboot === 'undefined') {
+        if(isApproved) {
+          this.setClientMeta(client);
+        } else {
+          set(this, 'clientApproved', false);
+        }
+      }
+    } else {
+      set(this, 'invalidSubdomain', true);
+    }
+  },
+
+  _notFound() {
+    const isAdminSubdomain = get(this, 'isEmptySubdomain');
+
+    if(!isAdminSubdomain) {
+      set(this, 'invalidSubdomain', true);
     }
   },
 
   setClientMeta(client) {
-    const appName = get(client, 'appName');
+    const appName = get(client, 'appName') || get(this, 'defaultAppName');
 
     $('#appTitle')[0].text = appName;
     $('#apple-appTitle')[0].content = appName;
-    $('#apple-appIcon')[0].href = get(client, 'logoPath');
+
+    if(!isEmpty(client)) {
+      $('#apple-appIcon')[0].href = get(client, 'logoPath');
+    }
   }
 });

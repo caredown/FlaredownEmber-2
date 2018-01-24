@@ -1,0 +1,5 @@
+<div class="colorable-clr-38">{{user.email}}</div>
+{{#if userIsAdmin}}
+  <div>{{user.role}}</div>
+{{/if}}
+<a {{action 'onDelete' user}}>delete</a>

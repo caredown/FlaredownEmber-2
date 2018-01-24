@@ -7,6 +7,8 @@
 
       {{#if (or (eq currentPath 'login') (eq currentPath 'signup') (eq currentPath 'password.reset'))}}
         <h4>{{client-appname}}</h4>
+      {{else}}
+        <h4 class="centered ">{{t "clientAccess.login.header"}}</h4>
       {{/if}}
     {{/if}}
   </header>

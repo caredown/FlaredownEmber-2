@@ -1,0 +1,26 @@
+{{#form-for for=model onSubmit="save"}}
+  {{#form-field for="appName" label="App name (maximum 30 characters)"}}
+    {{input type="text" value=model.appName placeholder="Enter Client Application Name"}}
+  {{/form-field}}
+
+  {{#form-field for="name" label="Company name (used in the Terms of Service)"}}
+    {{input type="text" value=model.name placeholder="Enter Client Name"}}
+  {{/form-field}}
+
+  {{#form-field for="themeColor" label="Color" class="fs-private"}}
+    {{client/color-selection model=model}}
+  {{/form-field}}
+
+  {{#form-field for="logo" label='Logo'}}
+    {{client/client-logo onCrop=(action 'setLogo')}}
+  {{/form-field}}
+
+  {{input type="submit" class="btn btn-default left" value="Save"}}
+
+  {{#if errorMessage}}
+    <div class="alert alert-danger">
+      <p><strong>Update failed:</strong> <code>{{errorMessage}}</code></p>
+    </div>
+  {{/if}}
+{{/form-for}}
+

@@ -1,11 +1,15 @@
-{{#application-wrapper}}
-  {{partial "application/header"}}
+{{#application-wrapper as |config|}}
+  {{#if (or config.invalidSubdomain (not config.clientApproved) )}}
+    {{invalid-subdomain invalidSubdomain=config.invalidSubdomain}}
+  {{else}}
+    {{application-header currentPath=currentPath isAdminSubdomain=config.isEmptySubdomain}}
 
-  {{outlet}}
+    {{outlet}}
+  {{/if}}
 
-  {{partial "application/footer"}}
+  {{application-footer isAdminSubdomain=config.isEmptySubdomain}}
 
-  {{#if session.isAuthenticated}}
+  {{#if (and session.isAuthenticated (not config.isEmptySubdomain))}}
     {{bottom-nav}}
   {{/if}}
 

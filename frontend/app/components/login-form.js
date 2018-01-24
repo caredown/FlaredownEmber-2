@@ -1,8 +1,20 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const {
+  computed: { alias },
+  inject: {
+    service,
+  },
+  Component
+} = Ember;
 
+export default Component.extend({
   classNames: ['login-form'],
+  signupPath: 'signup',
+
+  i18n: service(),
+  clientDispatcher: service(),
+  isEmptySubdomain: alias('clientDispatcher.isEmptySubdomain'),
 
   actions: {
     authenticateWithDevise() {

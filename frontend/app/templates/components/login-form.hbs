@@ -7,8 +7,9 @@
     <label for="password">Password</label>
     {{input value=password placeholder='Enter Password' class='form-control' type='password'}}
   </div>
+
   <p>
-    Not a member yet? {{#link-to 'signup'}}Signup Now{{/link-to}}
+    Not a member yet? {{#link-to signupPath}}Signup Now{{/link-to}}
   </p>
   {{input type="submit" class="btn btn-default right" value="Login"}}
 {{/form-for}}

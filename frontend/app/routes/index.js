@@ -4,6 +4,7 @@ import CheckinByDate from 'flaredown/mixins/checkin-by-date';
 
 const {
   get,
+  getProperties,
   Route,
 } = Ember;
 
@@ -22,28 +23,39 @@ export default Route.extend(CheckinByDate, AuthenticatedRouteMixin, {
     if (typeof FastBoot !== 'undefined') { return; }
 
     transition.abort();
-
     if (get(this, 'session.isAuthenticated')) {
       get(this, 'session.currentUser').then(currentUser => {
-        get(currentUser, 'profile').then(profile => {
-          if (get(profile, 'isOnboarded')) {
-            const date = moment(new Date()).format('YYYY-MM-DD');
+        const { clientPersisted, role } = getProperties(currentUser, 'clientPersisted', 'role');
 
-            this.checkinByDate(date).then(
-              () => {
-                this.routeToCheckin(date);
-              },
-              () => {
-                this.routeToNewCheckin(date);
-              }
-            );
-          } else {
-            this.transitionTo('onboarding', get(profile, 'onboardingStep.stepName'));
-          }
-        });
+        if(role === 'admin') {
+          this.transitionTo('client');
+        } else if(role === 'client') {
+          clientPersisted ? this.transitionTo('client.show', get(currentUser, 'client.id')) : this.transitionTo('client.new');
+        } else {
+          this.transitionToStartPage(currentUser);
+        }
       });
     } else {
       return this._super(...arguments);
     }
+  },
+
+  transitionToStartPage(currentUser) {
+    get(currentUser, 'profile').then(profile => {
+      if (get(profile, 'isOnboarded')) {
+        const date = moment(new Date()).format('YYYY-MM-DD');
+
+        this.checkinByDate(date).then(
+          () => {
+            this.routeToCheckin(date);
+          },
+          () => {
+            this.routeToNewCheckin(date);
+          }
+        );
+      } else {
+        this.transitionTo('onboarding', get(profile, 'onboardingStep.stepName'));
+      }
+    });
   },
 });

@@ -21,6 +21,7 @@
   "devDependencies": {
     "active-model-adapter": "2.1.1",
     "broccoli-asset-rev": "^2.4.5",
+    "ember-addons-inspector": "^1.1.0",
     "ember-ajax": "^3.0.0",
     "ember-at-js": "git+https://github.com/litslink/ember-at-js.git",
     "ember-cli": "~2.14.0",
@@ -37,6 +38,7 @@
     "ember-cli-fastboot": "^1.0.0-rc.4",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^0.4.3",
+    "ember-cli-image-cropper": "0.0.13",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-meta-tags": "^4.0.0",
     "ember-cli-neat": "0.0.5",
@@ -66,7 +68,7 @@
     "ember-source": "~2.14.0",
     "ember-time-field": "^0.1.5",
     "ember-truth-helpers": "1.2.0",
-    "ember-userengage": "0.1.0",
+    "ember-uploader": "^1.2.3",
     "loader.js": "^4.2.3",
     "torii": "^0.8.0"
   },

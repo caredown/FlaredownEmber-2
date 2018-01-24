@@ -8,6 +8,7 @@ export default DS.Model.extend({
   passwordConfirmation: DS.attr('string'),
   screenName: DS.attr('string'),
   captchaResponse: DS.attr('string'),
+  role: DS.attr('string'),
 
   // Associations
   user: DS.belongsTo('user', { async: false })

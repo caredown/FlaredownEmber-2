@@ -1,0 +1,23 @@
+<p>App name: <br>
+  <span class="clientBgText">{{model.appName}}</span>
+</p>
+
+<p>App url: <br>
+  <span class="clientBgText">{{clientUrl}}</span>
+</p>
+
+{{#form-for for=model onSubmit="save"}}
+  {{#form-field for="themeColor" label="Color" class="fs-private"}}
+    {{client/color-selection model=model}}
+  {{/form-field}}
+
+  {{#if model.logo}}
+     <img id="clientLogo" class="clientLogo" src={{model.logo}}>
+  {{/if}}
+
+  {{#form-field for="logo" label='Logo'}}
+    {{client/client-logo onCrop=(action 'setLogo') showPreview=showPreview}}
+  {{/form-field}}
+
+  {{input type="submit" class="btn btn-default left" value=(if isLoading "Saving..." "Save") disabled=isLoading}}
+{{/form-for}}

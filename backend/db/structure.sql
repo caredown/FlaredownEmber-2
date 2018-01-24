@@ -72,7 +72,9 @@ CREATE TABLE clients (
     privacy_policy text,
     logo character varying,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    user_id integer,
+    approved boolean DEFAULT true
 );
 
 
@@ -810,7 +812,8 @@ CREATE TABLE users (
     invited_by_type character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    client_id integer
+    client_id integer,
+    role character varying
 );
 
 
@@ -1230,6 +1233,13 @@ CREATE INDEX idx_fts_food_translations_en ON food_translations USING gin (to_tsv
 --
 
 CREATE INDEX idx_fts_food_translations_it ON food_translations USING gin (to_tsvector('italian'::regconfig, (long_desc)::text)) WHERE ((locale)::text = 'it'::text);
+
+
+--
+-- Name: index_clients_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_clients_on_user_id ON clients USING btree (user_id);
 
 
 --
@@ -1691,4 +1701,10 @@ INSERT INTO schema_migrations (version) VALUES ('20171121102731');
 INSERT INTO schema_migrations (version) VALUES ('20171128081115');
 
 INSERT INTO schema_migrations (version) VALUES ('20171212110911');
+
+INSERT INTO schema_migrations (version) VALUES ('20180104103858');
+
+INSERT INTO schema_migrations (version) VALUES ('20180109094719');
+
+INSERT INTO schema_migrations (version) VALUES ('20180123170945');
 

@@ -23,7 +23,8 @@
 #  invited_by_type        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#
+#  client_id              :integer
+#  is_client              :boolean          default: false
 
 class User < ActiveRecord::Base
   include Authenticatable
@@ -65,6 +66,23 @@ class User < ActiveRecord::Base
   # Delegates
   #
   delegate :locale, :notify, :notify_token, :screen_name, to: :profile
+  delegate :approved, to: :client
+
+  ROLES = %w(admin client).freeze
+
+  def approved?
+    return false unless client? && client
+
+    approved
+  end
+
+  def client?
+    role == 'client'
+  end
+
+  def admin?
+    role == 'admin'
+  end
 
   def checkins
     Checkin.where(encrypted_user_id: encrypted_id)

@@ -62,12 +62,18 @@ gem 'symmetric-encryption'
 
 gem 'ruby-progressbar', require: false
 
+gem 'kaminari-activerecord'
 gem 'kaminari-mongoid'
 gem 'kaminari-actionview'
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-base64'
+gem 'mini_magick'
 gem 'acts_as_tenant'
+
+gem 'dnsimple'
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
