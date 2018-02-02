@@ -3,7 +3,6 @@ import Ember from 'ember';
 const {
   get,
   set,
-  computed,
   computed: { alias, isBlank },
   inject: {
     service,
@@ -18,10 +17,7 @@ export default Component.extend({
   i18n: service(),
   session: service(),
   slugName: alias('model.slugName'),
-
-  userIsAdmin: computed('session.currentUser.role', function() {
-    return get(this, 'session.currentUser.role') === 'admin';
-  }),
+  userIsAdmin: null,
 
   generateSlugName(appName) {
     if(isBlank(appName)) {

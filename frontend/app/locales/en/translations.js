@@ -142,6 +142,9 @@ export default {
 
       userIndex: {
         btnValue: '+ Invite users',
+      },
+      appTab: {
+        customLabel: 'Custom (must be valid HEX color code)'
       }
     },
   }

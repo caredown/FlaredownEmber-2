@@ -1,3 +1,78 @@
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.alignBaseline {
+  align-items: baseline;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.adminHeader {
+  @include outer-container;
+  max-width: 500px;
+  margin-bottom: 1em;
+  &::after { display: none }
+}
+
+.client-header-data {
+  @include outer-container;
+  max-width: 500px;
+
+  .clientHeader {
+    padding: 0 30px;
+  }
+}
+
+.colorList {
+  label {
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+  }
+
+  .themeColorSquare {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+  }
+}
+
+.admin-nav-links {
+  .backToClient {
+    margin-right: 1em;
+  }
+}
+
+.btn-client {
+  display: flex;
+  justify-content: center;
+
+  button {
+    color: black;
+    font-weight: normal;
+    font-size: 1.2em;
+    background-color: transparent;
+    padding-left: 0;
+
+    min-width: 170px;
+    margin: 0 10px;
+
+    &.active {
+      font-weight: 600;
+    }
+
+    &:hover,
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+
 .client-dashboard {
   @include outer-container;
   @include single-col;
@@ -26,31 +101,6 @@
 
   .inviteBox {
     margin-top: 1.2em;
-  }
-
-  .admin-nav-links {
-    .backToClient {
-      margin-right: 1em;
-    }
-  }
-
-  .btn-client {
-    button {
-      color: black;
-      font-weight: normal;
-      font-size: 1.2em;
-      background-color: transparent;
-      padding-left: 0;
-
-      &.active {
-        font-weight: 600;
-      }
-
-      &:hover,
-      &:focus {
-        outline: 0;
-      }
-    }
   }
 
   input[type=submit] {

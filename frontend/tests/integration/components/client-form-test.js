@@ -14,7 +14,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{client-form}}`);
   let response = this.$().text().trim().replace(/\s{2,}/g,' ');
-  let text = "App name (maximum 30 characters) Company name (used in the Terms of Service) Color Emerald Amethyst Azure Custom Logo";
+  let text = "App name (maximum 30 characters) Company name (used in the Terms of Service) Color Turquoise Emerald Peter River Amethyst Sun Flower Carrot Alizarin Wet Asphalt Custom (must be valid HEX color code) Logo";
 
   // debugger;
 
