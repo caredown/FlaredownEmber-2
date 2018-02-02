@@ -1,5 +1,5 @@
 {{#if (or model.approved userIsAdmin)}}
-  {{client/client-show model=model userIsAdmin=userIsAdmin}}
+  {{client/client-show model=model userIsAdmin=userIsAdmin usersVisible=usersVisible appVisible=appVisible}}
 {{else}}
   {{client/wait-approval}}
 {{/if}}

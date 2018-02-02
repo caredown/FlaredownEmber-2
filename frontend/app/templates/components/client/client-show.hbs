@@ -1,20 +1,3 @@
-<div class="flexContainer alignBaseline">
-  <p class="clientBgText">{{model.name}}</p>
-
-  <div class='admin-nav-links flexContainer'>
-    {{#if userIsAdmin}}
-      <div class='backToClient'>{{link-to 'Clients' 'client'}}</div>
-    {{/if}}
-
-    {{logout-link model=model}}
-  </div>
-</div>
-
-<div class="btn-client vert-offset-top-1 vert-offset-bottom-2">
-  <button {{action "showUsers"}} class={{if usersVisible "active" ""}}>Users</button>
-  <button {{action "showApp"}} class={{if appVisible "active" "" }}>App</button>
-</div>
-
 {{#if usersVisible}}
   {{client/user-index model=model clientUrl=clientUrl userIsAdmin=userIsAdmin}}
 {{else}}
