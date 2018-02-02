@@ -1,0 +1,3 @@
+subdomain: <%= @subdomain %>
+refere: <%= @referer %>
+current_tenant: <%= @current_tenant.slug_name %>
