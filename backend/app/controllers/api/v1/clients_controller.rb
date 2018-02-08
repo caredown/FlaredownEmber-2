@@ -4,7 +4,7 @@ class Api::V1::ClientsController < ApplicationController
 
   def index
     if params[:subdomain].present?
-      raise ActiveRecord::RecordNotFound if current_tenant.nil?
+      raise ActiveRecord::RecordNotFound unless current_tenant.present?
 
       render json: current_tenant, root_url: root_url, root: 'client'
     else
@@ -52,12 +52,9 @@ class Api::V1::ClientsController < ApplicationController
   end
 
   def manifest
-    render json: { key: 'no tenant' } unless current_tenant
-    render json: WebManifestService.new(current_tenant, root_url).as_json if current_tenant
+    return unless current_tenant
 
-    # return unless current_tenant
-
-    # render json: WebManifestService.new(current_tenant, root_url).as_json
+    render json: WebManifestService.new(current_tenant, root_url).as_json
   end
 
   def root_url

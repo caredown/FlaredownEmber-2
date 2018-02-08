@@ -7,7 +7,6 @@ class ClientApprovementMailer < ApplicationMailer
     return unless @client
 
     @email = @client.author.try(:email)
-    encrypted_client_id = SymmetricEncryption.encrypt(@client.id)
 
     slug_name = @client.slug_name
     subdomain = ENV['APP_ENV'] == 'staging' ? "#{slug_name}.stg" : slug_name
