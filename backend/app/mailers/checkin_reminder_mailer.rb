@@ -2,16 +2,16 @@ class CheckinReminderMailer < ApplicationMailer
   layout 'mailer_layout'
 
   def remind(notification_hash)
+    @client = Client.find_by(id: notification_hash[:client_id])
+    return unless @client
+
     @email = notification_hash[:email]
 
-    user = User.find_by(email: @email)
+    user = @client.users.find_by(email: @email)
     return unless user
 
     @notify_token = user.notify_token
     return unless @notify_token
-
-    @client = user.client
-    return unless @client
 
     @subdomain = @client.slug_name
     @app_name = @client.app_name.to_s
