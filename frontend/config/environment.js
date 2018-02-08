@@ -27,7 +27,7 @@ module.exports = function(environment) {
     torii: {
       providers: {
         'facebook-connect': {
-          appId: process.env.FACEBOOK_APP_ID,
+          appId: process.env.FACEBOOK_APP_ID || 'test_key',
           version: 'v2.5'
         }
       }
@@ -86,7 +86,7 @@ module.exports = function(environment) {
     var STATIC_URL = 'http://localhost:4300';
   }
 
-  if (environment === 'production') {
+  if (environment === 'production' || environment === 'staging') {
     ENV['heap-analytics'] = {
       key: process.env.HEAP_KEY,
     };
