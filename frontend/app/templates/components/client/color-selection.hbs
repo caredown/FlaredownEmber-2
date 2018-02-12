@@ -1,9 +1,12 @@
 {{#each COLORS as |color|}}
   {{#radio-button name="color" value=color.code groupValue=model.themeColor changed="colorChanged"}}
+    <div class="themeColorSquare" style="background-color:{{color.code}}"></div>
     {{color.name}}
   {{/radio-button}}
 {{/each}}
-{{#radio-button name='color' value=customColorValue groupValue=model.themeColor changed="onCustom"}}Custom{{/radio-button}}
+{{#radio-button name='color' value=customColorValue groupValue=model.themeColor changed="onCustom"}}
+  {{t "clientAccess.dashboard.appTab.customLabel" }}
+{{/radio-button}}
 
 {{#if isCustom}}
   {{input type="text" class="themeColor" value=model.themeColor placeholder="Enter Theme Color in HEX format"}}

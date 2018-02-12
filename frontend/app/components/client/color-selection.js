@@ -10,12 +10,20 @@ const {
 } = Ember;
 
 const COLORS =
- [{ name: 'Emerald', code: '#50C878' },
-  { name: 'Amethyst', code: '#9966cc' },
-  { name: 'Azure', code: '#007fff' }];
+ [{ name: 'Turquoise', code: '#1abc9c' },
+  { name: 'Emerald', code: '#2ecc71' },
+  { name: 'Peter River', code: '#3498db' },
+  { name: 'Amethyst', code: '#9b59b6' },
+  { name: 'Sun Flower', code: '#f1c40f' },
+  { name: 'Carrot', code: '#e67e22' },
+  { name: 'Alizarin', code: '#e74c3c' },
+  { name: 'Wet Asphalt', code: '#34495e' }];
 
 export default Component.extend({
   i18n: service(),
+
+  classNames: ['colorList'],
+
   COLORS,
   customColor: null,
 
