@@ -30,7 +30,7 @@ class Profile < ActiveRecord::Base
   #
   belongs_to :user
 
-  delegate :email, to: :user
+  delegate :email, :client_id, :client?, :admin?, to: :user
 
   #
   # Validations
