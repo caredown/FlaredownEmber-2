@@ -1,6 +1,7 @@
 class Api::V1::ClientsController < ApplicationController
   skip_before_action :authenticate_user!
   load_and_authorize_resource
+  skip_authorize_resource only: :theme
 
   def index
     if params[:subdomain].present?
