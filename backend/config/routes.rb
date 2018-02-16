@@ -203,8 +203,8 @@ Rails.application.routes.draw do
       resources :charts_pattern, only: [:index]
 
       resources :clients
-      get '/clients/theme', to: 'clients#theme'
-      get '/clients/manifest', to: 'clients#manifest'
+      get '/theme', to: 'clients#theme'
+      get '/manifest', to: 'clients#manifest'
     end
   end
 end
