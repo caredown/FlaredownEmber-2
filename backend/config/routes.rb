@@ -204,7 +204,7 @@ Rails.application.routes.draw do
 
       resources :clients
       get '/theme', to: 'clients#theme'
-      get '/clients/manifest', to: 'clients#manifest'
+      get '/manifest', to: 'clients#manifest'
     end
   end
 end
